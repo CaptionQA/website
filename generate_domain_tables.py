@@ -42,16 +42,22 @@ def calculate_category_scores(domain, prompt, model_file):
     file_path = os.path.join(qa_results_path, domain, prompt, model_file)
 
     if not os.path.exists(file_path):
-        return None
+        return None, None
 
     with open(file_path, 'r') as f:
         data = json.load(f)
 
     # Aggregate scores by category
     category_scores = defaultdict(lambda: {"correct": 0, "total": 0})
+    overall_correct = 0
+    overall_total = 0
 
     for image_id, questions in data.items():
         for q in questions:
+            overall_total += 1
+            if q.get("is_correct", False):
+                overall_correct += 1
+
             if "category" in q and len(q["category"]) > 0:
                 category = q["category"][0]
                 # Extract top-level category
@@ -67,7 +73,10 @@ def calculate_category_scores(domain, prompt, model_file):
         if scores["total"] > 0:
             results[cat] = round(100 * scores["correct"] / scores["total"], 2)
 
-    return results
+    # Calculate overall score
+    overall_score = round(100 * overall_correct / overall_total, 2) if overall_total > 0 else None
+
+    return results, overall_score
 
 # Prompt display names
 prompt_display = {
@@ -93,15 +102,16 @@ for domain in domains:
     for prompt in prompts:
         for model_key, info in model_info.items():
             model_file = f"{model_key}.json"
-            scores = calculate_category_scores(domain, prompt, model_file)
+            scores, overall_score = calculate_category_scores(domain, prompt, model_file)
 
-            if scores:
+            if scores and overall_score is not None:
                 row_data = {
                     "model": info["name"],
                     "affiliation": info["affiliation"],
                     "type": info["type"],
                     "size": info["size"],
                     "prompt": prompt_display[prompt],
+                    "overall": overall_score,
                     "scores": scores
                 }
                 domain_data[domain].append(row_data)
@@ -121,7 +131,8 @@ for domain in domains:
                       <td class="align-middle text-center">{row["model"]}<br><span class="affiliation">{row["affiliation"]}</span></td>
                       <td class="align-middle text-center"><span class="badge {badge_class}">{row["type"]}</span></td>
                       <td class="align-middle text-center">{row["size"]}</td>
-                      <td class="align-middle text-center">{row["prompt"]}</td>''', end='')
+                      <td class="align-middle text-center">{row["prompt"]}</td>
+                      <td class="align-middle text-center">{row["overall"]}</td>''', end='')
 
         # Add category scores in order
         for cat in category_order[domain]:

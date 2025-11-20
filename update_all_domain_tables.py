@@ -35,35 +35,43 @@ domains_config = {
 }
 
 for domain, tbody_content in domain_tables.items():
-    # First, update the table header to add Size column
+    # First, update the table header to add Size and Overall columns if not present
     header_pattern = rf'(<div id="{domain}-board".*?<thead class="thead-light">.*?<tr>)'
-    header_replacement_pattern = rf'(<th class="align-middle text-center">Type</th>)(\s*<th class="align-middle text-center">Prompt</th>)'
 
     # Find and update header
     header_match = re.search(header_pattern, html_content, re.DOTALL)
     if header_match:
         header_section = header_match.group(0)
-        # Add Size column after Type
-        updated_header = re.sub(
-            header_replacement_pattern,
-            r'\1\n                      <th class="align-middle text-center">Size</th>\2',
-            header_section
-        )
-        html_content = html_content.replace(header_section, updated_header)
 
-    # Update sortable column indices (shift by 1 after adding Size column)
+        # Add Size column after Type if not present
+        if 'th class="align-middle text-center">Size</th>' not in header_section:
+            header_replacement_pattern = rf'(<th class="align-middle text-center">Type</th>)(\s*<th class="align-middle text-center">Prompt</th>)'
+            header_section = re.sub(
+                header_replacement_pattern,
+                r'\1\n                      <th class="align-middle text-center">Size</th>\2',
+                header_section
+            )
+
+        # Add Overall column after Prompt if not present
+        if 'th class="align-middle text-center' in header_section and 'Overall</th>' not in header_section:
+            prompt_pattern = rf'(<th class="align-middle text-center">Prompt</th>)(\s*<th class="align-middle text-center sortable")'
+            header_section = re.sub(
+                prompt_pattern,
+                r'\1\n                      <th class="align-middle text-center sortable" onclick="sortTable(\'' + domain + r'-table\', 5)">Overall</th>\2',
+                header_section
+            )
+
+        html_content = html_content.replace(header_match.group(0), header_section)
+
+    # Update sortable column indices
     # Find all sortTable calls for this domain's table
     table_id = f"{domain}-table"
 
-    # Update onclick handlers - need to increment column index by 1 for columns after Size
-    # The pattern is onclick="sortTable('domain-table', N)"
-    # Columns before Size (Rank=0, Model=1, Type=2) stay the same
-    # Size is now 3
-    # Prompt is now 4
-    # Category columns start at 5
+    # Column layout after updates:
+    # Rank=0, Model=1, Type=2, Size=3, Prompt=4, Overall=5, Categories start at 6
 
-    old_indices = list(range(4, 4 + len(domains_config[domain]["columns"])))  # Old indices starting at 4
-    new_indices = list(range(5, 5 + len(domains_config[domain]["columns"])))  # New indices starting at 5
+    old_indices = list(range(5, 5 + len(domains_config[domain]["columns"])))  # Old indices starting at 5
+    new_indices = list(range(6, 6 + len(domains_config[domain]["columns"])))  # New indices starting at 6
 
     for old_idx, new_idx in zip(old_indices, new_indices):
         html_content = html_content.replace(
