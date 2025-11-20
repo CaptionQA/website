@@ -78,6 +78,17 @@ pre {
     font-size: .75rem;
 }
 
+.eval-date {
+    font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
+    font-size: .65rem;
+    background-color: #e8e8e8;
+    padding: 2px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 3px;
+}
+
 .paperlink {
     font-size: .85em;
 }

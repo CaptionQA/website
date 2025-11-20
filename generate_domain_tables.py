@@ -130,7 +130,7 @@ for domain in domains:
         badge_class = "badge-primary" if row["type"] == "Proprietary" else "badge-success"
 
         print(f'''                    <tr>
-                      <td class="align-middle text-center">{rank}<br><span class="affiliation">{eval_date}</span></td>
+                      <td class="align-middle text-center">{rank}<br><span class="eval-date">{eval_date}</span></td>
                       <td class="align-middle text-center">{row["model"]}<br><span class="affiliation">{row["affiliation"]}</span></td>
                       <td class="align-middle text-center"><span class="badge {badge_class}">{row["type"]}</span></td>
                       <td class="align-middle text-center">{row["size"]}</td>
