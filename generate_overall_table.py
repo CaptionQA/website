@@ -103,13 +103,16 @@ for prompt in prompts:
 # Sort by overall score (descending)
 all_results.sort(key=lambda x: x["overall"], reverse=True)
 
+# Evaluation date
+eval_date = "2025-Nov-19"
+
 # Generate HTML
 print("<!-- Overall Leaderboard Table Body -->")
 for rank, row in enumerate(all_results, 1):
     badge_class = "badge-primary" if row["type"] == "Proprietary" else "badge-success"
 
     print(f'''                    <tr>
-                      <td class="align-middle text-center">{rank}</td>
+                      <td class="align-middle text-center">{rank}<br><span class="affiliation">{eval_date}</span></td>
                       <td class="align-middle text-center">{row["model"]}<br><span class="affiliation">{row["affiliation"]}</span></td>
                       <td class="align-middle text-center"><span class="badge {badge_class}">{row["type"]}</span></td>
                       <td class="align-middle text-center">{row["size"]}</td>

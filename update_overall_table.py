@@ -8,6 +8,9 @@ with open('overall_table_html.txt', 'r') as f:
 lines = overall_tbody.strip().split('\n')
 tbody_content = '\n'.join([line for line in lines if '<tr>' in line or '<td' in line or '</tr>' in line])
 
+# Count total models
+total_models = len([line for line in lines if '<tr>' in line])
+
 # Read the current HTML file
 with open('index.html', 'r') as f:
     html_content = f.read()
@@ -25,4 +28,4 @@ with open('index.html', 'w') as f:
     f.write(html_content)
 
 print("Successfully updated Overall leaderboard!")
-print("Total models: 16")
+print(f"Total models: {total_models}")
