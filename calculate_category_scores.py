@@ -65,14 +65,11 @@ for domain in domains:
         print(f"\nPrompt: {prompt}")
         print("-" * 60)
 
-        # Get top models
-        top_models = [
-            "gpt-5_Qwen2.5-72B-Instruct.json",
-            "gemini-2.5-pro_Qwen2.5-72B-Instruct.json",
-            "Qwen3-VL-30B-A3B-Instruct_Qwen2.5-72B-Instruct.json"
-        ]
+        # Get all available models
+        all_models = list(model_mapping.keys())
+        model_files = [f"{model}.json" for model in all_models]
 
-        for model_file in top_models:
+        for model_file in model_files:
             model_name = model_mapping.get(model_file.replace(".json", ""), model_file)
             scores = calculate_category_scores(domain, prompt, model_file)
 
