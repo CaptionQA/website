@@ -2,14 +2,11 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="CaptionQA Leaderboard - Utility-based Caption Evaluation" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="CaptionQA: Utility-based Caption Evaluation Benchmark" />
     <meta name="author" content="" />
     <link rel="icon" href="./logo/bird_fig_main.png" type="image/x-icon" />
-    <title>CaptionQA Leaderboard</title>
+    <title>CaptionQA Benchmark</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./style/bootstrap.min.css" rel="stylesheet" />
@@ -17,38 +14,6 @@
     <link rel="stylesheet" href="./style/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
     <link href="./style/clean-blog.min.css" rel="stylesheet" />
     <link href="./style/bird.css" rel="stylesheet" />
-
-    <style>
-      .filter-buttons {
-        margin-bottom: 20px;
-      }
-      .filter-btn {
-        margin: 5px;
-      }
-      .filter-btn.active {
-        background-color: #007bff;
-        color: white;
-      }
-      .table-wrapper {
-        overflow-x: auto;
-      }
-      .table th {
-        position: sticky;
-        top: 0;
-        background-color: #f8f9fa;
-        z-index: 10;
-      }
-      .model-row {
-        transition: background-color 0.2s;
-      }
-      .model-row:hover {
-        background-color: #f5f5f5;
-      }
-      .best-score {
-        font-weight: bold;
-        color: #28a745;
-      }
-    </style>
   </head>
 
   <body>
@@ -63,7 +28,7 @@
               <div class="col-lg-9">
                 <div class="align-middle">
                   <h1 id="bird-title">CaptionQA</h1>
-                  <span class="subheading" id="caption">Leaderboard: Is Your Caption as Useful as the Image Itself?</span>
+                  <span class="subheading" id="caption">A Utility-Based Benchmark for Evaluating Image Captions</span>
                 </div>
               </div>
             </div>
@@ -75,73 +40,139 @@
     <!-- Main Content -->
     <div class="container" id="main">
       <div class="row">
-        <!-- Left Column -->
         <div class="col-lg-5">
           <div class="list-group">
             <div class="list-group-item" id="introduction">
               <h4>About CaptionQA</h4>
               <p>
-                <b>CaptionQA</b> evaluates whether image captions can stand in for images in downstream tasks.
-                Unlike traditional metrics, we measure <b>utility</b>: how well captions preserve the information
+                CaptionQA is a benchmark that evaluates whether image captions can <b>stand in for images</b> in downstream tasks.
+                Unlike traditional metrics, CaptionQA measures <b>utility</b>: how well captions preserve the visual information
                 needed for real-world applications.
               </p>
               <p>
-                <b>Benchmark Stats:</b><br>
-                • 4 domains (Natural, Document, E-commerce, Embodied AI)<br>
-                • 33,027 questions across 657 images<br>
-                • 50.3 questions per image<br>
-                • 25 top-level + 69 subcategories
+                CaptionQA contains <b>33,027</b> multiple-choice questions over <b>657</b> images across <b>4 domains</b>:
+                Natural, Document, E-commerce, and Embodied AI. Each domain has a fine-grained taxonomy
+                (<b>25 top-level and 69 subcategories</b>) defining what information captions should preserve.
               </p>
               <div id="button-group">
                 <div class="button-row">
                   <a href="#" target="_blank">
-                    <button type="button" class="btn btn-a">Paper (Coming Soon)</button>
+                    <button type="button" class="btn btn-a">Paper</button>
                   </a>
                 </div>
                 <div class="button-row">
                   <a href="#" target="_blank">
-                    <button type="button" class="btn btn-a">GitHub (Coming Soon)</button>
+                    <button type="button" class="btn btn-a">GitHub</button>
                   </a>
                 </div>
                 <div class="button-row">
                   <a href="#" target="_blank">
-                    <button type="button" class="btn btn-a">Dataset (Coming Soon)</button>
+                    <button type="button" class="btn btn-a">Dev Set (50%)</button>
                   </a>
+                </div>
+                <div class="button-row" id="button-row-b">
+                  <div class="btn-round">
+                    <a href="#" target="_blank">
+                      <button type="button" class="btn btn-b">🔥 Submit Results</button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="list-group-item" id="submission">
-              <h4>Submit Results</h4>
-              <p>
-                To submit your results to the leaderboard:
+            <style>
+              .scroll-container {
+                position: relative;
+                width: 100%;
+                max-height: 300px;
+                overflow-y: scroll;
+              }
+              .scroll-container::-webkit-scrollbar {
+                width: 10px;
+                background: transparent;
+              }
+              .scroll-container::-webkit-scrollbar-thumb {
+                background-color: #ffffff;
+                border-radius: 5px;
+              }
+              .scroll-container:hover::-webkit-scrollbar {
+                width: 10px;
+              }
+              .scroll-container:hover::-webkit-scrollbar-thumb:hover {
+                background-color: #555;
+              }
+            </style>
+
+            <div class="list-group-item" id="news">
+              <h4>News</h4>
+              <div class="scroll-container">
+                <div class="card card-outline-secondary mb-4" style="text-align: left">
+                  <div class="card-body" style="background-color: #f1f6f9">
+                    <ul style="padding-left: 0">
+                      <li style="list-style-type: none">
+                        <span style="background-color: #B03052; color: white; padding: 2px 4px; border-radius: 5px;">
+                          <strong style="color: #ffe7ce">Nov. 19, 2024:</strong>
+                        </span>
+                        <span style="background-color: #FF6B35; color: white; padding: 2px 6px; border-radius: 5px; margin-left: 5px; font-weight: bold;">
+                          Initial Release
+                        </span>
+                        <br><br>
+                        CaptionQA benchmark website launched! We will soon release the development set (50% of questions) with images
+                        for local evaluation. Full test set evaluation will be available through our submission portal.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="list-group-item" id="submission-info">
+              <h4>How to Submit</h4>
+              <p><b>Step 1: Download Dev Set</b></p>
+              <p style="font-size: 14px; margin-left: 15px;">
+                Download the development set (50% of questions + all images) to evaluate your model locally.
               </p>
-              <ol style="padding-left: 20px; font-size: 14px;">
-                <li>Generate captions for our benchmark images using your model</li>
-                <li>Run our evaluation script (coming soon)</li>
-                <li>Submit via GitHub PR or email with:
-                  <ul>
-                    <li>Model name and details</li>
-                    <li>Results JSON file</li>
-                    <li>Paper/tech report link (if available)</li>
-                    <li>Code repository link (optional)</li>
-                  </ul>
-                </li>
-              </ol>
-              <p style="font-size: 13px; color: #666;">
-                <b>Note:</b> Detailed submission instructions will be available with the dataset release.
+
+              <p><b>Step 2: Generate Captions</b></p>
+              <p style="font-size: 14px; margin-left: 15px;">
+                Generate captions for all benchmark images using your captioning model. You can use any prompt strategy
+                (Long, Short, Simple, or Taxonomy-Hinted).
+              </p>
+
+              <p><b>Step 3: Submit for Evaluation</b></p>
+              <p style="font-size: 14px; margin-left: 15px;">
+                Submit your generated captions through our evaluation portal. We will run your captions on the
+                <b>full test set</b> (hidden 50%) and update the leaderboard with both Dev and Test scores.
+              </p>
+
+              <p><b>Step 4: Update Leaderboard</b></p>
+              <p style="font-size: 14px; margin-left: 15px;">
+                If you have a public paper or technical report, submit a PR to update the leaderboard table with
+                your paper link and model details.
               </p>
             </div>
 
             <div class="list-group-item" id="domains">
               <h4>Evaluation Domains</h4>
-              <p><b>Natural:</b> Object properties, spatial relations, hallucination (6 categories, 22 subcategories)</p>
-              <p><b>Document:</b> Layout, content, structure for automation (6, 15)</p>
-              <p><b>E-commerce:</b> Product attributes for recommendations (7, 16)</p>
-              <p><b>Embodied AI:</b> Spatial understanding for robotics (6, 16)</p>
+              <p style="font-size: 14px;">
+                <b>Natural Images</b> (6 categories, 22 subcategories)<br>
+                Object properties, spatial relations, scene understanding, hallucination detection
+              </p>
+              <p style="font-size: 14px;">
+                <b>Document</b> (6 categories, 15 subcategories)<br>
+                Layout analysis, text content, table structure, document-specific elements
+              </p>
+              <p style="font-size: 14px;">
+                <b>E-commerce</b> (7 categories, 16 subcategories)<br>
+                Product attributes, presentation details, UI elements, brand information
+              </p>
+              <p style="font-size: 14px;">
+                <b>Embodied AI</b> (6 categories, 16 subcategories)<br>
+                Spatial understanding, object affordances, environment perception, task-relevant cues
+              </p>
             </div>
 
-            <div class="list-group-item" id="citation">
+            <div class="list-group-item">
               <h4>Citation</h4>
               <pre style="background-color: #f5f5f5; padding: 10px; border-radius: 5px; font-size: 11px;">@article{captionqa2026,
   title={CaptionQA: Is Your Caption as Useful
@@ -156,567 +187,286 @@
 
         <!-- Right Column - Leaderboard -->
         <div class="col-lg-7">
-          <!-- Prompt Type Filter -->
+          <!-- Prompt Type Selector -->
           <div class="btn-group mb-3 w-100">
-            <button id="prompt-long-btn" class="btn btn-f filter-btn active" onclick="showPrompt('long')">Long Prompt</button>
-            <button id="prompt-short-btn" class="btn btn-f filter-btn" onclick="showPrompt('short')">Short Prompt</button>
-            <button id="prompt-simple-btn" class="btn btn-f filter-btn" onclick="showPrompt('simple')">Simple Prompt</button>
-            <button id="prompt-taxonomy-btn" class="btn btn-f filter-btn" onclick="showPrompt('taxonomy')">Taxonomy-Hinted</button>
+            <button id="overall-leaderboard-btn" class="btn btn-f">Overall Leaderboard</button>
+            <button id="domain-leaderboard-btn" class="btn btn-f">Domain-Specific</button>
           </div>
 
-          <!-- Long Prompt Leaderboard -->
-          <div id="leaderboard-long" class="leaderboard-content">
+          <!-- Overall Leaderboard -->
+          <div id="overall-leaderboard">
             <div class="card card-outline-secondary">
-              <div class="card-header">Leaderboard - Long Prompt (QA-on-Caption %)</div>
+              <div class="card-header">Leaderboard - Caption Utility Score (%)</div>
               <div class="table-wrapper">
-                <table class="table table-sm" id="long-table">
+                <table class="table" id="overall-table">
                   <thead class="thead-light">
                     <tr>
-                      <th class="align-middle text-center">Rank</th>
-                      <th class="align-middle text-center">Model</th>
-                      <th class="align-middle text-center">Type</th>
-                      <th class="align-middle text-center">Size</th>
-                      <th class="align-middle text-center">Overall</th>
-                      <th class="align-middle text-center">Natural</th>
-                      <th class="align-middle text-center">Document</th>
-                      <th class="align-middle text-center">E-commerce</th>
-                      <th class="align-middle text-center">Embodied AI</th>
+                      <th scope="col" rowspan="1" class="align-middle text-center"></th>
+                      <th scope="col" rowspan="1" class="align-middle text-center">Model</th>
+                      <th scope="col" rowspan="1" class="align-middle text-center">Code</th>
+                      <th scope="col" rowspan="1" class="align-middle text-center">Size</th>
+                      <th scope="col" rowspan="1" class="align-middle text-center">Prompt</th>
+                      <th scope="col" colspan="1" class="text-center">Dev (%)</th>
+                      <th scope="col" colspan="1" class="text-center">Test (%)</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">1</td>
-                      <td class="align-middle text-center">Gemini 2.5 Pro</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
-                      <td class="align-middle text-center best-score">90.12</td>
-                      <td class="align-middle text-center">89.44</td>
-                      <td class="align-middle text-center">88.67</td>
-                      <td class="align-middle text-center">95.60</td>
-                      <td class="align-middle text-center best-score">86.78</td>
+                    <!-- Proprietary Models -->
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        Gemini 2.5 Pro<br>
+                        <span class="affiliation">Google</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">90.12</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">2</td>
-                      <td class="align-middle text-center">GPT-5</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
+
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        GPT-5<br>
+                        <span class="affiliation">OpenAI</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
                       <td class="align-middle text-center">89.82</td>
-                      <td class="align-middle text-center best-score">90.34</td>
-                      <td class="align-middle text-center best-score">90.01</td>
-                      <td class="align-middle text-center best-score">96.11</td>
-                      <td class="align-middle text-center">82.83</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">3</td>
-                      <td class="align-middle text-center">Qwen3-VL</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">30B-A3B</td>
-                      <td class="align-middle text-center best-score">87.12</td>
-                      <td class="align-middle text-center best-score">85.62</td>
-                      <td class="align-middle text-center">86.05</td>
-                      <td class="align-middle text-center best-score">94.27</td>
-                      <td class="align-middle text-center best-score">82.55</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">4</td>
-                      <td class="align-middle text-center">GLM-4.1V</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">9B</td>
-                      <td class="align-middle text-center">85.83</td>
-                      <td class="align-middle text-center">82.92</td>
-                      <td class="align-middle text-center best-score">88.34</td>
-                      <td class="align-middle text-center">93.03</td>
-                      <td class="align-middle text-center">79.01</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">5</td>
-                      <td class="align-middle text-center">Qwen2.5-VL</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">32B</td>
-                      <td class="align-middle text-center">81.40</td>
-                      <td class="align-middle text-center">78.95</td>
-                      <td class="align-middle text-center">82.14</td>
-                      <td class="align-middle text-center">90.76</td>
-                      <td class="align-middle text-center">73.73</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">6</td>
-                      <td class="align-middle text-center">Claude Sonnet 4.5</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
-                      <td class="align-middle text-center">80.97</td>
-                      <td class="align-middle text-center">77.78</td>
-                      <td class="align-middle text-center">85.08</td>
-                      <td class="align-middle text-center">91.11</td>
-                      <td class="align-middle text-center">69.90</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">7</td>
-                      <td class="align-middle text-center">InternVL3.5</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">38B</td>
-                      <td class="align-middle text-center">80.11</td>
-                      <td class="align-middle text-center">78.70</td>
-                      <td class="align-middle text-center">78.78</td>
-                      <td class="align-middle text-center">87.53</td>
-                      <td class="align-middle text-center">75.41</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">8</td>
-                      <td class="align-middle text-center">InternVL3</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">14B</td>
-                      <td class="align-middle text-center">73.81</td>
-                      <td class="align-middle text-center">72.41</td>
-                      <td class="align-middle text-center">71.88</td>
-                      <td class="align-middle text-center">84.05</td>
-                      <td class="align-middle text-center">66.89</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">9</td>
-                      <td class="align-middle text-center">NVLM-D</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">72B</td>
-                      <td class="align-middle text-center">71.06</td>
-                      <td class="align-middle text-center">72.66</td>
-                      <td class="align-middle text-center">65.39</td>
-                      <td class="align-middle text-center">79.05</td>
-                      <td class="align-middle text-center">67.15</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">10</td>
-                      <td class="align-middle text-center">LLaVA-OneVision</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">7B</td>
-                      <td class="align-middle text-center">68.76</td>
-                      <td class="align-middle text-center">70.20</td>
-                      <td class="align-middle text-center">61.93</td>
-                      <td class="align-middle text-center">77.24</td>
-                      <td class="align-middle text-center">65.67</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
 
-          <!-- Short Prompt Leaderboard -->
-          <div id="leaderboard-short" class="leaderboard-content" style="display: none;">
-            <div class="card card-outline-secondary">
-              <div class="card-header">Leaderboard - Short Prompt (QA-on-Caption %)</div>
-              <div class="table-wrapper">
-                <table class="table table-sm">
-                  <thead class="thead-light">
                     <tr>
-                      <th class="align-middle text-center">Rank</th>
-                      <th class="align-middle text-center">Model</th>
-                      <th class="align-middle text-center">Type</th>
-                      <th class="align-middle text-center">Size</th>
-                      <th class="align-middle text-center">Overall</th>
-                      <th class="align-middle text-center">Natural</th>
-                      <th class="align-middle text-center">Document</th>
-                      <th class="align-middle text-center">E-commerce</th>
-                      <th class="align-middle text-center">Embodied AI</th>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        GPT-5<br>
+                        <span class="affiliation">OpenAI</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">90.29</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">1</td>
-                      <td class="align-middle text-center">GLM-4.1V</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">9B</td>
-                      <td class="align-middle text-center best-score">60.87</td>
-                      <td class="align-middle text-center best-score">62.43</td>
-                      <td class="align-middle text-center best-score">55.69</td>
-                      <td class="align-middle text-center best-score">64.05</td>
-                      <td class="align-middle text-center best-score">61.29</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">2</td>
-                      <td class="align-middle text-center">Qwen3-VL</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">4B</td>
-                      <td class="align-middle text-center">57.49</td>
-                      <td class="align-middle text-center">60.52</td>
-                      <td class="align-middle text-center">48.12</td>
-                      <td class="align-middle text-center">61.69</td>
-                      <td class="align-middle text-center">59.63</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">3</td>
-                      <td class="align-middle text-center">Gemini 2.5 Pro</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
-                      <td class="align-middle text-center best-score">54.49</td>
-                      <td class="align-middle text-center best-score">55.33</td>
-                      <td class="align-middle text-center">46.25</td>
-                      <td class="align-middle text-center best-score">58.98</td>
-                      <td class="align-middle text-center">57.40</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">4</td>
-                      <td class="align-middle text-center">InternVL3.5</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">38B</td>
-                      <td class="align-middle text-center">54.27</td>
-                      <td class="align-middle text-center">56.52</td>
-                      <td class="align-middle text-center">44.24</td>
-                      <td class="align-middle text-center">59.16</td>
-                      <td class="align-middle text-center">57.16</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">5</td>
-                      <td class="align-middle text-center">GPT-o4-mini</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
-                      <td class="align-middle text-center">53.94</td>
-                      <td class="align-middle text-center">54.76</td>
-                      <td class="align-middle text-center best-score">46.40</td>
-                      <td class="align-middle text-center">56.84</td>
-                      <td class="align-middle text-center best-score">57.76</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">6</td>
-                      <td class="align-middle text-center">Claude Sonnet 4.5</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
-                      <td class="align-middle text-center">53.82</td>
-                      <td class="align-middle text-center">56.77</td>
-                      <td class="align-middle text-center">46.04</td>
-                      <td class="align-middle text-center">59.31</td>
-                      <td class="align-middle text-center">53.16</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">7</td>
-                      <td class="align-middle text-center">InternVL3</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">8B</td>
-                      <td class="align-middle text-center">53.31</td>
-                      <td class="align-middle text-center">56.50</td>
-                      <td class="align-middle text-center">44.58</td>
-                      <td class="align-middle text-center">56.99</td>
-                      <td class="align-middle text-center">55.17</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">8</td>
-                      <td class="align-middle text-center">Qwen2.5-VL</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">32B</td>
-                      <td class="align-middle text-center">52.88</td>
-                      <td class="align-middle text-center">54.74</td>
-                      <td class="align-middle text-center">45.32</td>
-                      <td class="align-middle text-center">57.89</td>
-                      <td class="align-middle text-center">53.58</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">9</td>
-                      <td class="align-middle text-center">NVLM-D</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">72B</td>
-                      <td class="align-middle text-center">48.67</td>
-                      <td class="align-middle text-center">51.29</td>
-                      <td class="align-middle text-center">40.99</td>
-                      <td class="align-middle text-center">50.88</td>
-                      <td class="align-middle text-center">51.53</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">10</td>
-                      <td class="align-middle text-center">LLaVA-OneVision</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">7B</td>
-                      <td class="align-middle text-center">47.13</td>
-                      <td class="align-middle text-center">51.01</td>
-                      <td class="align-middle text-center">38.28</td>
-                      <td class="align-middle text-center">49.80</td>
-                      <td class="align-middle text-center">49.41</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
 
-          <!-- Simple Prompt Leaderboard -->
-          <div id="leaderboard-simple" class="leaderboard-content" style="display: none;">
-            <div class="card card-outline-secondary">
-              <div class="card-header">Leaderboard - Simple Prompt (QA-on-Caption %)</div>
-              <div class="table-wrapper">
-                <table class="table table-sm">
-                  <thead class="thead-light">
                     <tr>
-                      <th class="align-middle text-center">Rank</th>
-                      <th class="align-middle text-center">Model</th>
-                      <th class="align-middle text-center">Type</th>
-                      <th class="align-middle text-center">Size</th>
-                      <th class="align-middle text-center">Overall</th>
-                      <th class="align-middle text-center">Natural</th>
-                      <th class="align-middle text-center">Document</th>
-                      <th class="align-middle text-center">E-commerce</th>
-                      <th class="align-middle text-center">Embodied AI</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">1</td>
-                      <td class="align-middle text-center">GPT-5</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
-                      <td class="align-middle text-center best-score">90.29</td>
-                      <td class="align-middle text-center">88.78</td>
-                      <td class="align-middle text-center best-score">90.81</td>
-                      <td class="align-middle text-center">94.73</td>
-                      <td class="align-middle text-center best-score">86.82</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">2</td>
-                      <td class="align-middle text-center">Gemini 2.5 Flash</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        Gemini 2.5 Flash<br>
+                        <span class="affiliation">Google</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Simple</td>
                       <td class="align-middle text-center">89.64</td>
-                      <td class="align-middle text-center best-score">88.95</td>
-                      <td class="align-middle text-center">88.97</td>
-                      <td class="align-middle text-center best-score">95.73</td>
-                      <td class="align-middle text-center">84.89</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">3</td>
-                      <td class="align-middle text-center">Qwen3-VL</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">30B-A3B</td>
-                      <td class="align-middle text-center best-score">87.02</td>
-                      <td class="align-middle text-center best-score">86.14</td>
-                      <td class="align-middle text-center">85.89</td>
-                      <td class="align-middle text-center best-score">93.90</td>
-                      <td class="align-middle text-center best-score">82.15</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">4</td>
-                      <td class="align-middle text-center">GLM-4.1V</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">9B</td>
-                      <td class="align-middle text-center">84.28</td>
-                      <td class="align-middle text-center">81.67</td>
-                      <td class="align-middle text-center best-score">87.86</td>
-                      <td class="align-middle text-center">92.04</td>
-                      <td class="align-middle text-center">75.56</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">5</td>
-                      <td class="align-middle text-center">Qwen2.5-VL</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">32B</td>
-                      <td class="align-middle text-center">81.20</td>
-                      <td class="align-middle text-center">78.35</td>
-                      <td class="align-middle text-center">82.67</td>
-                      <td class="align-middle text-center">90.81</td>
-                      <td class="align-middle text-center">72.98</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">6</td>
-                      <td class="align-middle text-center">InternVL3.5</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">38B</td>
-                      <td class="align-middle text-center">79.58</td>
-                      <td class="align-middle text-center">78.26</td>
-                      <td class="align-middle text-center">78.91</td>
-                      <td class="align-middle text-center">86.47</td>
-                      <td class="align-middle text-center">74.68</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">7</td>
-                      <td class="align-middle text-center">Claude Sonnet 4.5</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
-                      <td class="align-middle text-center">78.95</td>
-                      <td class="align-middle text-center">76.56</td>
-                      <td class="align-middle text-center">83.09</td>
-                      <td class="align-middle text-center">88.86</td>
-                      <td class="align-middle text-center">67.27</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">8</td>
-                      <td class="align-middle text-center">InternVL3</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">8B</td>
-                      <td class="align-middle text-center">77.84</td>
-                      <td class="align-middle text-center">76.46</td>
-                      <td class="align-middle text-center">75.83</td>
-                      <td class="align-middle text-center">87.01</td>
-                      <td class="align-middle text-center">72.07</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">9</td>
-                      <td class="align-middle text-center">NVLM-D</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">72B</td>
-                      <td class="align-middle text-center">71.79</td>
-                      <td class="align-middle text-center">73.13</td>
-                      <td class="align-middle text-center">65.25</td>
-                      <td class="align-middle text-center">78.46</td>
-                      <td class="align-middle text-center">70.31</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">10</td>
-                      <td class="align-middle text-center">LLaVA-OneVision</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">7B</td>
-                      <td class="align-middle text-center">66.03</td>
-                      <td class="align-middle text-center">66.56</td>
-                      <td class="align-middle text-center">61.45</td>
-                      <td class="align-middle text-center">75.09</td>
-                      <td class="align-middle text-center">61.01</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
 
-          <!-- Taxonomy-Hinted Leaderboard -->
-          <div id="leaderboard-taxonomy" class="leaderboard-content" style="display: none;">
-            <div class="card card-outline-secondary">
-              <div class="card-header">Leaderboard - Taxonomy-Hinted Prompt (QA-on-Caption %)</div>
-              <div class="table-wrapper">
-                <table class="table table-sm">
-                  <thead class="thead-light">
                     <tr>
-                      <th class="align-middle text-center">Rank</th>
-                      <th class="align-middle text-center">Model</th>
-                      <th class="align-middle text-center">Type</th>
-                      <th class="align-middle text-center">Size</th>
-                      <th class="align-middle text-center">Overall</th>
-                      <th class="align-middle text-center">Natural</th>
-                      <th class="align-middle text-center">Document</th>
-                      <th class="align-middle text-center">E-commerce</th>
-                      <th class="align-middle text-center">Embodied AI</th>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        Gemini 2.5 Pro<br>
+                        <span class="affiliation">Google</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Taxonomy</td>
+                      <td class="align-middle text-center">86.42</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">1</td>
-                      <td class="align-middle text-center">Gemini 2.5 Pro</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
-                      <td class="align-middle text-center best-score">86.42</td>
-                      <td class="align-middle text-center best-score">87.47</td>
-                      <td class="align-middle text-center">81.34</td>
-                      <td class="align-middle text-center best-score">91.50</td>
-                      <td class="align-middle text-center best-score">85.35</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">2</td>
-                      <td class="align-middle text-center">GPT-5</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
+
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        GPT-5<br>
+                        <span class="affiliation">OpenAI</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Taxonomy</td>
                       <td class="align-middle text-center">83.24</td>
-                      <td class="align-middle text-center">86.87</td>
-                      <td class="align-middle text-center">72.36</td>
-                      <td class="align-middle text-center">88.63</td>
-                      <td class="align-middle text-center">85.10</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">3</td>
-                      <td class="align-middle text-center">Claude Sonnet 4.5</td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">--</td>
+
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        Claude Sonnet 4.5<br>
+                        <span class="affiliation">Anthropic</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">80.97</td>
+                      <td class="align-middle text-center"><b>-</b></td>
+                    </tr>
+
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        Claude Sonnet 4.5<br>
+                        <span class="affiliation">Anthropic</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Taxonomy</td>
                       <td class="align-middle text-center">80.19</td>
-                      <td class="align-middle text-center">77.36</td>
-                      <td class="align-middle text-center best-score">83.23</td>
-                      <td class="align-middle text-center">89.74</td>
-                      <td class="align-middle text-center">70.44</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">4</td>
-                      <td class="align-middle text-center">Qwen3-VL</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">8B</td>
-                      <td class="align-middle text-center best-score">77.21</td>
-                      <td class="align-middle text-center best-score">78.99</td>
-                      <td class="align-middle text-center">70.82</td>
-                      <td class="align-middle text-center best-score">84.19</td>
-                      <td class="align-middle text-center best-score">74.85</td>
+
+                    <!-- Open Source Models -->
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        Qwen3-VL<br>
+                        <span class="affiliation">Alibaba</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center"><a href="#">[link]</a></td>
+                      <td class="align-middle text-center">30B-A3B</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">87.12</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">5</td>
-                      <td class="align-middle text-center">GLM-4.1V</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
+
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        Qwen3-VL<br>
+                        <span class="affiliation">Alibaba</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center"><a href="#">[link]</a></td>
+                      <td class="align-middle text-center">30B-A3B</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">87.02</td>
+                      <td class="align-middle text-center"><b>-</b></td>
+                    </tr>
+
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        GLM-4.1V<br>
+                        <span class="affiliation">Zhipu AI</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center"><a href="#">[link]</a></td>
                       <td class="align-middle text-center">9B</td>
-                      <td class="align-middle text-center">76.18</td>
-                      <td class="align-middle text-center">75.87</td>
-                      <td class="align-middle text-center best-score">72.40</td>
-                      <td class="align-middle text-center">83.87</td>
-                      <td class="align-middle text-center">72.59</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">85.83</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">6</td>
-                      <td class="align-middle text-center">Qwen2.5-VL</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
+
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        GLM-4.1V<br>
+                        <span class="affiliation">Zhipu AI</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center"><a href="#">[link]</a></td>
+                      <td class="align-middle text-center">9B</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">84.28</td>
+                      <td class="align-middle text-center"><b>-</b></td>
+                    </tr>
+
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        Qwen2.5-VL<br>
+                        <span class="affiliation">Alibaba</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center"><a href="#">[link]</a></td>
                       <td class="align-middle text-center">32B</td>
-                      <td class="align-middle text-center">74.91</td>
-                      <td class="align-middle text-center">74.64</td>
-                      <td class="align-middle text-center">71.44</td>
-                      <td class="align-middle text-center">83.55</td>
-                      <td class="align-middle text-center">70.02</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">81.40</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">7</td>
-                      <td class="align-middle text-center">NVLM-D</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">72B</td>
-                      <td class="align-middle text-center">68.20</td>
-                      <td class="align-middle text-center">72.63</td>
-                      <td class="align-middle text-center">59.61</td>
-                      <td class="align-middle text-center">76.12</td>
-                      <td class="align-middle text-center">64.42</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">8</td>
-                      <td class="align-middle text-center">InternVL3</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">8B</td>
-                      <td class="align-middle text-center">67.48</td>
-                      <td class="align-middle text-center">71.57</td>
-                      <td class="align-middle text-center">55.05</td>
-                      <td class="align-middle text-center">75.82</td>
-                      <td class="align-middle text-center">67.46</td>
-                    </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">9</td>
-                      <td class="align-middle text-center">InternVL3.5</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
+
+                    <tr>
+                      <td scope="row" class="align-middle text-center counter-cell">
+                        <span class="badge badge-secondary">Baseline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        InternVL3.5<br>
+                        <span class="affiliation">Shanghai AI Lab</span><br>
+                        <a href="#" class="paperlink">[Paper]</a>
+                      </td>
+                      <td class="align-middle text-center"><a href="#">[link]</a></td>
                       <td class="align-middle text-center">38B</td>
-                      <td class="align-middle text-center">65.26</td>
-                      <td class="align-middle text-center">69.30</td>
-                      <td class="align-middle text-center">51.94</td>
-                      <td class="align-middle text-center">73.46</td>
-                      <td class="align-middle text-center">66.35</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">80.11</td>
+                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-                    <tr class="model-row">
-                      <td class="align-middle text-center">10</td>
-                      <td class="align-middle text-center">LLaVA-OneVision</td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">7B</td>
-                      <td class="align-middle text-center">62.91</td>
-                      <td class="align-middle text-center">63.24</td>
-                      <td class="align-middle text-center">56.57</td>
-                      <td class="align-middle text-center">69.78</td>
-                      <td class="align-middle text-center">62.03</td>
-                    </tr>
+
                   </tbody>
                 </table>
               </div>
             </div>
-          </div>
 
-          <!-- Visualization Section -->
-          <div class="card card-outline-secondary mt-3">
-            <div class="card-header">Performance Visualization</div>
-            <div class="card-body">
-              <img src="./img/taxonomy.png" alt="Domain Taxonomies" style="width: 100%; margin-bottom: 20px;" />
-              <p style="font-size: 13px; color: #666;">
-                <b>Figure:</b> CaptionQA taxonomies across four domains showing the visual information that captions must preserve.
+            <!-- Visualization Section -->
+            <div class="list-group-item" id="illustration" style="margin-top: 20px;">
+              <h4>Performance Visualization</h4>
+              <img class="img-fluid" src="./img/taxonomy.png" alt="Domain Taxonomies" style="width: 100%; margin-bottom: 15px;" />
+              <p style="font-size: 13px;">
+                <b>Domain Taxonomies:</b> CaptionQA defines what visual information captions should preserve across four real-world domains.
+              </p>
+
+              <img class="img-fluid" src="./img/domain_performance_gaps.png" alt="Performance Gaps" style="width: 100%; margin-bottom: 15px;" />
+              <p style="font-size: 13px;">
+                <b>Utility Gap Analysis:</b> Performance difference between QA-on-image and QA-on-caption reveals how much utility is lost.
+              </p>
+
+              <img class="img-fluid" src="./img/pipeline.png" alt="Benchmark Pipeline" style="width: 100%; margin-bottom: 15px;" />
+              <p style="font-size: 13px;">
+                <b>Benchmark Construction:</b> Multi-stage pipeline ensures high-quality, utility-focused evaluation questions.
               </p>
             </div>
+          </div>
+
+          <!-- Domain-Specific Leaderboard (Hidden by default) -->
+          <div id="domain-leaderboard" style="display: none;">
+            <p style="text-align: center; padding: 40px; color: #666;">
+              Domain-specific leaderboards coming soon. Results will be available after benchmark release.
+            </p>
           </div>
         </div>
       </div>
@@ -738,25 +488,35 @@
     <script src="./script/jquery.min.js"></script>
     <script src="./script/bootstrap.bundle.min.js"></script>
     <script src="./script/clean-blog.min.js"></script>
+    <script src="./script/leaderboard-toggle.min.js"></script>
 
     <script>
-      function showPrompt(promptType) {
-        // Hide all leaderboards
-        document.querySelectorAll('.leaderboard-content').forEach(el => {
-          el.style.display = 'none';
+      // Leaderboard toggle functionality
+      document.addEventListener("DOMContentLoaded", function() {
+        const overallBtn = document.getElementById("overall-leaderboard-btn");
+        const domainBtn = document.getElementById("domain-leaderboard-btn");
+        const overallBoard = document.getElementById("overall-leaderboard");
+        const domainBoard = document.getElementById("domain-leaderboard");
+
+        overallBtn.classList.add("active");
+        domainBtn.classList.remove("active");
+        overallBoard.style.display = "block";
+        domainBoard.style.display = "none";
+
+        overallBtn.addEventListener("click", function() {
+          overallBoard.style.display = "block";
+          domainBoard.style.display = "none";
+          overallBtn.classList.add("active");
+          domainBtn.classList.remove("active");
         });
 
-        // Remove active class from all buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-          btn.classList.remove('active');
+        domainBtn.addEventListener("click", function() {
+          overallBoard.style.display = "none";
+          domainBoard.style.display = "block";
+          overallBtn.classList.remove("active");
+          domainBtn.classList.add("active");
         });
-
-        // Show selected leaderboard
-        document.getElementById('leaderboard-' + promptType).style.display = 'block';
-
-        // Add active class to clicked button
-        document.getElementById('prompt-' + promptType + '-btn').classList.add('active');
-      }
+      });
     </script>
   </body>
 </html>
