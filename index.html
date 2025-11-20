@@ -11,9 +11,30 @@
     <!-- Bootstrap core CSS -->
     <link href="./style/bootstrap.min.css" rel="stylesheet" />
     <link href="./style/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="./style/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
     <link href="./style/clean-blog.min.css" rel="stylesheet" />
     <link href="./style/bird.css" rel="stylesheet" />
+
+    <style>
+      .sortable {
+        cursor: pointer;
+        user-select: none;
+      }
+      .sortable:hover {
+        background-color: #e9ecef;
+      }
+      .sortable::after {
+        content: ' ⇅';
+        opacity: 0.3;
+      }
+      .sortable.asc::after {
+        content: ' ↑';
+        opacity: 1;
+      }
+      .sortable.desc::after {
+        content: ' ↓';
+        opacity: 1;
+      }
+    </style>
   </head>
 
   <body>
@@ -45,14 +66,15 @@
             <div class="list-group-item" id="introduction">
               <h4>About CaptionQA</h4>
               <p>
-                CaptionQA is a benchmark that evaluates whether image captions can <b>stand in for images</b> in downstream tasks.
-                Unlike traditional metrics, CaptionQA measures <b>utility</b>: how well captions preserve the visual information
-                needed for real-world applications.
+                CaptionQA evaluates whether image captions can <b>stand in for images</b> in downstream tasks.
+                We measure <b>utility</b>: how well captions preserve visual information needed for real-world applications.
               </p>
               <p>
-                CaptionQA contains <b>33,027</b> multiple-choice questions over <b>657</b> images across <b>4 domains</b>:
-                Natural, Document, E-commerce, and Embodied AI. Each domain has a fine-grained taxonomy
-                (<b>25 top-level and 69 subcategories</b>) defining what information captions should preserve.
+                <b>Benchmark Stats:</b><br>
+                • 33,027 questions over 657 images<br>
+                • 4 domains (Natural, Document, E-commerce, Embodied AI)<br>
+                • 25 top-level + 69 subcategories<br>
+                • 50.3 questions per image on average
               </p>
               <div id="button-group">
                 <div class="button-row">
@@ -73,110 +95,36 @@
                 <div class="button-row" id="button-row-b">
                   <div class="btn-round">
                     <a href="#" target="_blank">
-                      <button type="button" class="btn btn-b">🔥 Submit Results</button>
+                      <button type="button" class="btn btn-b">Submit Results</button>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <style>
-              .scroll-container {
-                position: relative;
-                width: 100%;
-                max-height: 300px;
-                overflow-y: scroll;
-              }
-              .scroll-container::-webkit-scrollbar {
-                width: 10px;
-                background: transparent;
-              }
-              .scroll-container::-webkit-scrollbar-thumb {
-                background-color: #ffffff;
-                border-radius: 5px;
-              }
-              .scroll-container:hover::-webkit-scrollbar {
-                width: 10px;
-              }
-              .scroll-container:hover::-webkit-scrollbar-thumb:hover {
-                background-color: #555;
-              }
-            </style>
-
-            <div class="list-group-item" id="news">
-              <h4>News</h4>
-              <div class="scroll-container">
-                <div class="card card-outline-secondary mb-4" style="text-align: left">
-                  <div class="card-body" style="background-color: #f1f6f9">
-                    <ul style="padding-left: 0">
-                      <li style="list-style-type: none">
-                        <span style="background-color: #B03052; color: white; padding: 2px 4px; border-radius: 5px;">
-                          <strong style="color: #ffe7ce">Nov. 19, 2024:</strong>
-                        </span>
-                        <span style="background-color: #FF6B35; color: white; padding: 2px 6px; border-radius: 5px; margin-left: 5px; font-weight: bold;">
-                          Initial Release
-                        </span>
-                        <br><br>
-                        CaptionQA benchmark website launched! We will soon release the development set (50% of questions) with images
-                        for local evaluation. Full test set evaluation will be available through our submission portal.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div class="list-group-item" id="submission-info">
-              <h4>How to Submit</h4>
-              <p><b>Step 1: Download Dev Set</b></p>
-              <p style="font-size: 14px; margin-left: 15px;">
-                Download the development set (50% of questions + all images) to evaluate your model locally.
-              </p>
-
-              <p><b>Step 2: Generate Captions</b></p>
-              <p style="font-size: 14px; margin-left: 15px;">
-                Generate captions for all benchmark images using your captioning model. You can use any prompt strategy
-                (Long, Short, Simple, or Taxonomy-Hinted).
-              </p>
-
-              <p><b>Step 3: Submit for Evaluation</b></p>
-              <p style="font-size: 14px; margin-left: 15px;">
-                Submit your generated captions through our evaluation portal. We will run your captions on the
-                <b>full test set</b> (hidden 50%) and update the leaderboard with both Dev and Test scores.
-              </p>
-
-              <p><b>Step 4: Update Leaderboard</b></p>
-              <p style="font-size: 14px; margin-left: 15px;">
-                If you have a public paper or technical report, submit a PR to update the leaderboard table with
-                your paper link and model details.
-              </p>
+              <h4>Submission Workflow</h4>
+              <p><b>Step 1:</b> Download Dev Set (50% questions + all images)</p>
+              <p><b>Step 2:</b> Generate captions with your model</p>
+              <p><b>Step 3:</b> Submit captions for full test evaluation</p>
+              <p><b>Step 4:</b> PR to update leaderboard with results</p>
             </div>
 
             <div class="list-group-item" id="domains">
               <h4>Evaluation Domains</h4>
               <p style="font-size: 14px;">
-                <b>Natural Images</b> (6 categories, 22 subcategories)<br>
-                Object properties, spatial relations, scene understanding, hallucination detection
-              </p>
-              <p style="font-size: 14px;">
-                <b>Document</b> (6 categories, 15 subcategories)<br>
-                Layout analysis, text content, table structure, document-specific elements
-              </p>
-              <p style="font-size: 14px;">
-                <b>E-commerce</b> (7 categories, 16 subcategories)<br>
-                Product attributes, presentation details, UI elements, brand information
-              </p>
-              <p style="font-size: 14px;">
-                <b>Embodied AI</b> (6 categories, 16 subcategories)<br>
-                Spatial understanding, object affordances, environment perception, task-relevant cues
+                <b>Natural</b> - Object properties, spatial relations, scene understanding<br>
+                <b>Document</b> - Layout, text content, table structure<br>
+                <b>E-commerce</b> - Product attributes, UI elements<br>
+                <b>Embodied AI</b> - Spatial understanding, affordances
               </p>
             </div>
 
             <div class="list-group-item">
               <h4>Citation</h4>
               <pre style="background-color: #f5f5f5; padding: 10px; border-radius: 5px; font-size: 11px;">@article{captionqa2026,
-  title={CaptionQA: Is Your Caption as Useful
-         as the Image Itself?},
+  title={CaptionQA: Is Your Caption as
+         Useful as the Image Itself?},
   author={},
   journal={CVPR},
   year={2026}
@@ -187,273 +135,438 @@
 
         <!-- Right Column - Leaderboard -->
         <div class="col-lg-7">
-          <!-- Prompt Type Selector -->
-          <div class="btn-group mb-3 w-100">
-            <button id="overall-leaderboard-btn" class="btn btn-f">Overall Leaderboard</button>
-            <button id="domain-leaderboard-btn" class="btn btn-f">Domain-Specific</button>
+          <!-- Domain Selector -->
+          <div class="btn-group mb-3 w-100" style="display: flex; flex-wrap: wrap;">
+            <button id="overall-btn" class="btn btn-f" style="flex: 1;" onclick="showDomain('overall')">Overall</button>
+            <button id="natural-btn" class="btn btn-f" style="flex: 1;" onclick="showDomain('natural')">Natural</button>
+            <button id="document-btn" class="btn btn-f" style="flex: 1;" onclick="showDomain('document')">Document</button>
+            <button id="ecommerce-btn" class="btn btn-f" style="flex: 1;" onclick="showDomain('ecommerce')">E-commerce</button>
+            <button id="embodiedai-btn" class="btn btn-f" style="flex: 1;" onclick="showDomain('embodiedai')">Embodied AI</button>
           </div>
 
           <!-- Overall Leaderboard -->
-          <div id="overall-leaderboard">
+          <div id="overall-board" class="domain-board">
             <div class="card card-outline-secondary">
-              <div class="card-header">Leaderboard - Caption Utility Score (%)</div>
+              <div class="card-header">Overall Leaderboard - Caption Utility Score (%)</div>
               <div class="table-wrapper">
-                <table class="table" id="overall-table">
+                <table class="table table-sm" id="overall-table">
                   <thead class="thead-light">
                     <tr>
-                      <th scope="col" rowspan="1" class="align-middle text-center"></th>
-                      <th scope="col" rowspan="1" class="align-middle text-center">Model</th>
-                      <th scope="col" rowspan="1" class="align-middle text-center">Size</th>
-                      <th scope="col" rowspan="1" class="align-middle text-center">Prompt</th>
-                      <th scope="col" colspan="1" class="text-center">Dev (%)</th>
-                      <th scope="col" colspan="1" class="text-center">Test (%)</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('overall-table', 0)">Rank</th>
+                      <th class="align-middle text-center">Model</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('overall-table', 2)">Size</th>
+                      <th class="align-middle text-center">Prompt</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('overall-table', 4)">Dev (%)</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('overall-table', 5)">Test (%)</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- Proprietary Models -->
                     <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
+                      <td class="align-middle text-center">1</td>
                       <td class="align-middle text-center">
-                        Gemini 2.5 Pro<br>
-                        <span class="affiliation">Google</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
-                      </td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">90.12</td>
-                      <td class="align-middle text-center"><b>-</b></td>
-                    </tr>
-
-                    <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        GPT-5<br>
-                        <span class="affiliation">OpenAI</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
-                      </td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">89.82</td>
-                      <td class="align-middle text-center"><b>-</b></td>
-                    </tr>
-
-                    <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        GPT-5<br>
-                        <span class="affiliation">OpenAI</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
+                        GPT-5<br><span class="affiliation">OpenAI</span>
                       </td>
                       <td class="align-middle text-center">-</td>
                       <td class="align-middle text-center">Simple</td>
                       <td class="align-middle text-center">90.29</td>
-                      <td class="align-middle text-center"><b>-</b></td>
+                      <td class="align-middle text-center">-</td>
                     </tr>
-
                     <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
+                      <td class="align-middle text-center">2</td>
                       <td class="align-middle text-center">
-                        Gemini 2.5 Flash<br>
-                        <span class="affiliation">Google</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
+                        Gemini 2.5 Pro<br><span class="affiliation">Google</span>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">90.12</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">3</td>
+                      <td class="align-middle text-center">
+                        GPT-5<br><span class="affiliation">OpenAI</span>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">89.82</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">4</td>
+                      <td class="align-middle text-center">
+                        Gemini 2.5 Flash<br><span class="affiliation">Google</span>
                       </td>
                       <td class="align-middle text-center">-</td>
                       <td class="align-middle text-center">Simple</td>
                       <td class="align-middle text-center">89.64</td>
-                      <td class="align-middle text-center"><b>-</b></td>
-                    </tr>
-
-                    <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        Gemini 2.5 Pro<br>
-                        <span class="affiliation">Google</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
-                      </td>
                       <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Taxonomy</td>
-                      <td class="align-middle text-center">86.42</td>
-                      <td class="align-middle text-center"><b>-</b></td>
                     </tr>
-
                     <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
+                      <td class="align-middle text-center">5</td>
                       <td class="align-middle text-center">
-                        GPT-5<br>
-                        <span class="affiliation">OpenAI</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
-                      </td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Taxonomy</td>
-                      <td class="align-middle text-center">83.24</td>
-                      <td class="align-middle text-center"><b>-</b></td>
-                    </tr>
-
-                    <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        Claude Sonnet 4.5<br>
-                        <span class="affiliation">Anthropic</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
-                      </td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">80.97</td>
-                      <td class="align-middle text-center"><b>-</b></td>
-                    </tr>
-
-                    <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        Claude Sonnet 4.5<br>
-                        <span class="affiliation">Anthropic</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
-                      </td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Taxonomy</td>
-                      <td class="align-middle text-center">80.19</td>
-                      <td class="align-middle text-center"><b>-</b></td>
-                    </tr>
-
-                    <!-- Open Source Models -->
-                    <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        Qwen3-VL<br>
-                        <span class="affiliation">Alibaba</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
+                        Qwen3-VL<br><span class="affiliation">Alibaba</span>
                       </td>
                       <td class="align-middle text-center">30B-A3B</td>
                       <td class="align-middle text-center">Long</td>
                       <td class="align-middle text-center">87.12</td>
-                      <td class="align-middle text-center"><b>-</b></td>
+                      <td class="align-middle text-center">-</td>
                     </tr>
-
                     <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
+                      <td class="align-middle text-center">6</td>
                       <td class="align-middle text-center">
-                        Qwen3-VL<br>
-                        <span class="affiliation">Alibaba</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
+                        Qwen3-VL<br><span class="affiliation">Alibaba</span>
                       </td>
                       <td class="align-middle text-center">30B-A3B</td>
                       <td class="align-middle text-center">Simple</td>
                       <td class="align-middle text-center">87.02</td>
-                      <td class="align-middle text-center"><b>-</b></td>
+                      <td class="align-middle text-center">-</td>
                     </tr>
-
                     <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
+                      <td class="align-middle text-center">7</td>
                       <td class="align-middle text-center">
-                        GLM-4.1V<br>
-                        <span class="affiliation">Zhipu AI</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
+                        Gemini 2.5 Pro<br><span class="affiliation">Google</span>
+                      </td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Taxonomy</td>
+                      <td class="align-middle text-center">86.42</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">8</td>
+                      <td class="align-middle text-center">
+                        GLM-4.1V<br><span class="affiliation">Zhipu AI</span>
                       </td>
                       <td class="align-middle text-center">9B</td>
                       <td class="align-middle text-center">Long</td>
                       <td class="align-middle text-center">85.83</td>
-                      <td class="align-middle text-center"><b>-</b></td>
+                      <td class="align-middle text-center">-</td>
                     </tr>
-
                     <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
+                      <td class="align-middle text-center">9</td>
                       <td class="align-middle text-center">
-                        GLM-4.1V<br>
-                        <span class="affiliation">Zhipu AI</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
+                        GLM-4.1V<br><span class="affiliation">Zhipu AI</span>
                       </td>
                       <td class="align-middle text-center">9B</td>
                       <td class="align-middle text-center">Simple</td>
                       <td class="align-middle text-center">84.28</td>
-                      <td class="align-middle text-center"><b>-</b></td>
+                      <td class="align-middle text-center">-</td>
                     </tr>
-
                     <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
+                      <td class="align-middle text-center">10</td>
                       <td class="align-middle text-center">
-                        Qwen2.5-VL<br>
-                        <span class="affiliation">Alibaba</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
+                        GPT-5<br><span class="affiliation">OpenAI</span>
                       </td>
-                      <td class="align-middle text-center">32B</td>
-                      <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">81.40</td>
-                      <td class="align-middle text-center"><b>-</b></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Taxonomy</td>
+                      <td class="align-middle text-center">83.24</td>
+                      <td class="align-middle text-center">-</td>
                     </tr>
-
-                    <tr>
-                      <td scope="row" class="align-middle text-center counter-cell">
-                        <span class="badge badge-secondary">Baseline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        InternVL3.5<br>
-                        <span class="affiliation">Shanghai AI Lab</span><br>
-                        <a href="#" class="paperlink">[Paper]</a>
-                      </td>
-                      <td class="align-middle text-center">38B</td>
-                      <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">80.11</td>
-                      <td class="align-middle text-center"><b>-</b></td>
-                    </tr>
-
                   </tbody>
                 </table>
               </div>
             </div>
+          </div>
 
-            <!-- Visualization Section -->
-            <div class="list-group-item" id="illustration" style="margin-top: 20px;">
-              <h4>Performance Visualization</h4>
-              <img class="img-fluid" src="./img/taxonomy.png" alt="Domain Taxonomies" style="width: 100%; margin-bottom: 15px;" />
-              <p style="font-size: 13px;">
-                <b>Domain Taxonomies:</b> CaptionQA defines what visual information captions should preserve across four real-world domains.
-              </p>
-
-              <img class="img-fluid" src="./img/domain_performance_gaps.png" alt="Performance Gaps" style="width: 100%; margin-bottom: 15px;" />
-              <p style="font-size: 13px;">
-                <b>Utility Gap Analysis:</b> Performance difference between QA-on-image and QA-on-caption reveals how much utility is lost.
-              </p>
-
-              <img class="img-fluid" src="./img/pipeline.png" alt="Benchmark Pipeline" style="width: 100%; margin-bottom: 15px;" />
-              <p style="font-size: 13px;">
-                <b>Benchmark Construction:</b> Multi-stage pipeline ensures high-quality, utility-focused evaluation questions.
-              </p>
+          <!-- Natural Domain Leaderboard -->
+          <div id="natural-board" class="domain-board" style="display: none;">
+            <div class="card card-outline-secondary">
+              <div class="card-header">Natural Domain - Caption Utility Score (%)</div>
+              <div class="table-wrapper">
+                <table class="table table-sm" id="natural-table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 0)">Rank</th>
+                      <th class="align-middle text-center">Model</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 2)">Size</th>
+                      <th class="align-middle text-center">Prompt</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 4)">Dev (%)</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 5)">Test (%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="align-middle text-center">1</td>
+                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">90.34</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">2</td>
+                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">89.44</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">3</td>
+                      <td class="align-middle text-center">Gemini 2.5 Flash<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">88.95</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">4</td>
+                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">88.78</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">5</td>
+                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Taxonomy</td>
+                      <td class="align-middle text-center">87.47</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">6</td>
+                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Taxonomy</td>
+                      <td class="align-middle text-center">86.87</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">7</td>
+                      <td class="align-middle text-center">Qwen3-VL<br><span class="affiliation">Alibaba</span></td>
+                      <td class="align-middle text-center">30B-A3B</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">86.14</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">8</td>
+                      <td class="align-middle text-center">Qwen3-VL<br><span class="affiliation">Alibaba</span></td>
+                      <td class="align-middle text-center">30B-A3B</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">85.62</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
-          <!-- Domain-Specific Leaderboard (Hidden by default) -->
-          <div id="domain-leaderboard" style="display: none;">
-            <p style="text-align: center; padding: 40px; color: #666;">
-              Domain-specific leaderboards coming soon. Results will be available after benchmark release.
-            </p>
+          <!-- Document Domain Leaderboard -->
+          <div id="document-board" class="domain-board" style="display: none;">
+            <div class="card card-outline-secondary">
+              <div class="card-header">Document Domain - Caption Utility Score (%)</div>
+              <div class="table-wrapper">
+                <table class="table table-sm" id="document-table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 0)">Rank</th>
+                      <th class="align-middle text-center">Model</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 2)">Size</th>
+                      <th class="align-middle text-center">Prompt</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 4)">Dev (%)</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 5)">Test (%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="align-middle text-center">1</td>
+                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">90.81</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">2</td>
+                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">90.01</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">3</td>
+                      <td class="align-middle text-center">Gemini 2.5 Flash<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">88.97</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">4</td>
+                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">88.67</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">5</td>
+                      <td class="align-middle text-center">GLM-4.1V<br><span class="affiliation">Zhipu AI</span></td>
+                      <td class="align-middle text-center">9B</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">88.34</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">6</td>
+                      <td class="align-middle text-center">GLM-4.1V<br><span class="affiliation">Zhipu AI</span></td>
+                      <td class="align-middle text-center">9B</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">87.86</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
+
+          <!-- E-commerce Domain Leaderboard -->
+          <div id="ecommerce-board" class="domain-board" style="display: none;">
+            <div class="card card-outline-secondary">
+              <div class="card-header">E-commerce Domain - Caption Utility Score (%)</div>
+              <div class="table-wrapper">
+                <table class="table table-sm" id="ecommerce-table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 0)">Rank</th>
+                      <th class="align-middle text-center">Model</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 2)">Size</th>
+                      <th class="align-middle text-center">Prompt</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 4)">Dev (%)</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 5)">Test (%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="align-middle text-center">1</td>
+                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">96.11</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">2</td>
+                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">95.60</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">3</td>
+                      <td class="align-middle text-center">Gemini 2.5 Flash<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">95.73</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">4</td>
+                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">94.73</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">5</td>
+                      <td class="align-middle text-center">Qwen3-VL<br><span class="affiliation">Alibaba</span></td>
+                      <td class="align-middle text-center">30B-A3B</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">94.27</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">6</td>
+                      <td class="align-middle text-center">Qwen3-VL<br><span class="affiliation">Alibaba</span></td>
+                      <td class="align-middle text-center">30B-A3B</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">93.90</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Embodied AI Domain Leaderboard -->
+          <div id="embodiedai-board" class="domain-board" style="display: none;">
+            <div class="card card-outline-secondary">
+              <div class="card-header">Embodied AI Domain - Caption Utility Score (%)</div>
+              <div class="table-wrapper">
+                <table class="table table-sm" id="embodiedai-table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 0)">Rank</th>
+                      <th class="align-middle text-center">Model</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 2)">Size</th>
+                      <th class="align-middle text-center">Prompt</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 4)">Dev (%)</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 5)">Test (%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="align-middle text-center">1</td>
+                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">86.78</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">2</td>
+                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">86.82</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">3</td>
+                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Taxonomy</td>
+                      <td class="align-middle text-center">85.35</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">4</td>
+                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Taxonomy</td>
+                      <td class="align-middle text-center">85.10</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">5</td>
+                      <td class="align-middle text-center">Gemini 2.5 Flash<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Simple</td>
+                      <td class="align-middle text-center">84.89</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">6</td>
+                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">82.83</td>
+                      <td class="align-middle text-center">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -474,35 +587,76 @@
     <script src="./script/jquery.min.js"></script>
     <script src="./script/bootstrap.bundle.min.js"></script>
     <script src="./script/clean-blog.min.js"></script>
-    <script src="./script/leaderboard-toggle.min.js"></script>
 
     <script>
-      // Leaderboard toggle functionality
-      document.addEventListener("DOMContentLoaded", function() {
-        const overallBtn = document.getElementById("overall-leaderboard-btn");
-        const domainBtn = document.getElementById("domain-leaderboard-btn");
-        const overallBoard = document.getElementById("overall-leaderboard");
-        const domainBoard = document.getElementById("domain-leaderboard");
-
-        overallBtn.classList.add("active");
-        domainBtn.classList.remove("active");
-        overallBoard.style.display = "block";
-        domainBoard.style.display = "none";
-
-        overallBtn.addEventListener("click", function() {
-          overallBoard.style.display = "block";
-          domainBoard.style.display = "none";
-          overallBtn.classList.add("active");
-          domainBtn.classList.remove("active");
+      // Domain switching
+      function showDomain(domain) {
+        // Hide all boards
+        document.querySelectorAll('.domain-board').forEach(el => {
+          el.style.display = 'none';
         });
 
-        domainBtn.addEventListener("click", function() {
-          overallBoard.style.display = "none";
-          domainBoard.style.display = "block";
-          overallBtn.classList.remove("active");
-          domainBtn.classList.add("active");
+        // Remove active class from all buttons
+        document.querySelectorAll('.btn-f').forEach(btn => {
+          btn.classList.remove('active');
         });
+
+        // Show selected board
+        document.getElementById(domain + '-board').style.display = 'block';
+        document.getElementById(domain + '-btn').classList.add('active');
+      }
+
+      // Initialize - show overall by default
+      document.addEventListener('DOMContentLoaded', function() {
+        showDomain('overall');
       });
+
+      // Table sorting
+      function sortTable(tableId, columnIndex) {
+        const table = document.getElementById(tableId);
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const header = table.querySelectorAll('th')[columnIndex];
+
+        // Determine sort direction
+        const isAscending = header.classList.contains('asc');
+
+        // Remove all sort classes
+        table.querySelectorAll('th').forEach(th => {
+          th.classList.remove('asc', 'desc');
+        });
+
+        // Add new sort class
+        if (isAscending) {
+          header.classList.add('desc');
+        } else {
+          header.classList.add('asc');
+        }
+
+        // Sort rows
+        rows.sort((a, b) => {
+          const aValue = a.cells[columnIndex].textContent.trim();
+          const bValue = b.cells[columnIndex].textContent.trim();
+
+          // Try to parse as number
+          const aNum = parseFloat(aValue);
+          const bNum = parseFloat(bValue);
+
+          if (!isNaN(aNum) && !isNaN(bNum)) {
+            return isAscending ? bNum - aNum : aNum - bNum;
+          } else {
+            return isAscending ? bValue.localeCompare(aValue) : aValue.localeCompare(bValue);
+          }
+        });
+
+        // Re-append sorted rows
+        rows.forEach(row => tbody.appendChild(row));
+
+        // Update rank column
+        rows.forEach((row, index) => {
+          row.cells[0].textContent = index + 1;
+        });
+      }
     </script>
   </body>
 </html>
