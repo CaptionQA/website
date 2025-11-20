@@ -7,18 +7,34 @@ qa_results_path = "/Users/yunongliu/Github/CaptionQA/qa_results"
 
 # Domains and prompts
 domains = ["natural", "document", "ecommerce", "embodiedai"]
-prompts = ["long", "simple"]  # Focus on main prompts for leaderboard
+prompts = ["long", "short", "simple", "taxonomy_default"]
 
 # Model name mapping
 model_mapping = {
     "gpt-5_Qwen2.5-72B-Instruct": "GPT-5",
+    "gpt-4o_Qwen2.5-72B-Instruct": "GPT-4o",
+    "o4-mini_Qwen2.5-72B-Instruct": "o4-mini",
     "gemini-2.5-pro_Qwen2.5-72B-Instruct": "Gemini 2.5 Pro",
     "gemini-2.5-flash_Qwen2.5-72B-Instruct": "Gemini 2.5 Flash",
-    "Qwen3-VL-30B-A3B-Instruct_Qwen2.5-72B-Instruct": "Qwen3-VL",
-    "GLM-4.1V-9B-Thinking_Qwen2.5-72B-Instruct": "GLM-4.1V",
-    "Qwen2.5-VL-32B-Instruct_Qwen2.5-72B-Instruct": "Qwen2.5-VL",
     "Claude-Sonnet-4.5_Qwen2.5-72B-Instruct": "Claude Sonnet 4.5",
-    "InternVL3_5-38B_Qwen2.5-72B-Instruct": "InternVL3.5"
+    "Mistral-Small-3.1-24B-Instruct-2503_Qwen2.5-72B-Instruct": "Mistral Small 3.1",
+    "Qwen3-VL-30B-A3B-Instruct_Qwen2.5-72B-Instruct": "Qwen3-VL-30B-A3B",
+    "Qwen3-VL-8B-Instruct_Qwen2.5-72B-Instruct": "Qwen3-VL-8B",
+    "Qwen3-VL-4B-Instruct_Qwen2.5-72B-Instruct": "Qwen3-VL-4B",
+    "Qwen2.5-VL-72B-Instruct_Qwen2.5-72B-Instruct": "Qwen2.5-VL-72B",
+    "Qwen2.5-VL-32B-Instruct_Qwen2.5-72B-Instruct": "Qwen2.5-VL-32B",
+    "Qwen2.5-VL-7B-Instruct_Qwen2.5-72B-Instruct": "Qwen2.5-VL-7B",
+    "GLM-4.1V-9B-Thinking_Qwen2.5-72B-Instruct": "GLM-4.1V-9B",
+    "InternVL3_5-38B_Qwen2.5-72B-Instruct": "InternVL3.5-38B",
+    "InternVL3_5-30B-A3B_Qwen2.5-72B-Instruct": "InternVL3.5-30B-A3B",
+    "InternVL3_5-8B_Qwen2.5-72B-Instruct": "InternVL3.5-8B",
+    "InternVL3_5-1B_Qwen2.5-72B-Instruct": "InternVL3.5-1B",
+    "InternVL3-78B_Qwen2.5-72B-Instruct": "InternVL3-78B",
+    "InternVL3-14B_Qwen2.5-72B-Instruct": "InternVL3-14B",
+    "InternVL3-8B_Qwen2.5-72B-Instruct": "InternVL3-8B",
+    "nvidia_NVLM-D-72B_Qwen2.5-72B-Instruct": "NVLM-D-72B",
+    "llava-onevision-qwen2-7b-ov-hf_Qwen2.5-72B-Instruct": "LLaVA-OneVision-7B",
+    "llava-1.5-7b-hf_Qwen2.5-72B-Instruct": "LLaVA-1.5-7B"
 }
 
 def calculate_category_scores(domain, prompt, model_file):

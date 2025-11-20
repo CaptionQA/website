@@ -7,18 +7,34 @@ qa_results_path = "/Users/yunongliu/Github/CaptionQA/qa_results"
 
 # Domains and prompts
 domains = ["natural", "document", "ecommerce", "embodiedai"]
-prompts = ["long", "simple"]
+prompts = ["long", "short", "simple", "taxonomy_default"]
 
 # Model name mapping with affiliations and types
 model_info = {
-    "gpt-5_Qwen2.5-72B-Instruct": {"name": "GPT-5", "affiliation": "OpenAI", "type": "Proprietary"},
-    "gemini-2.5-pro_Qwen2.5-72B-Instruct": {"name": "Gemini 2.5 Pro", "affiliation": "Google", "type": "Proprietary"},
-    "gemini-2.5-flash_Qwen2.5-72B-Instruct": {"name": "Gemini 2.5 Flash", "affiliation": "Google", "type": "Proprietary"},
-    "Qwen3-VL-30B-A3B-Instruct_Qwen2.5-72B-Instruct": {"name": "Qwen3-VL", "affiliation": "Alibaba", "type": "Open-Source"},
-    "GLM-4.1V-9B-Thinking_Qwen2.5-72B-Instruct": {"name": "GLM-4.1V", "affiliation": "Zhipu AI", "type": "Open-Source"},
-    "Qwen2.5-VL-32B-Instruct_Qwen2.5-72B-Instruct": {"name": "Qwen2.5-VL", "affiliation": "Alibaba", "type": "Open-Source"},
-    "Claude-Sonnet-4.5_Qwen2.5-72B-Instruct": {"name": "Claude Sonnet 4.5", "affiliation": "Anthropic", "type": "Proprietary"},
-    "InternVL3_5-38B_Qwen2.5-72B-Instruct": {"name": "InternVL3.5", "affiliation": "Shanghai AI Lab", "type": "Open-Source"}
+    "gpt-5_Qwen2.5-72B-Instruct": {"name": "GPT-5", "affiliation": "OpenAI", "type": "Proprietary", "size": "-"},
+    "gpt-4o_Qwen2.5-72B-Instruct": {"name": "GPT-4o", "affiliation": "OpenAI", "type": "Proprietary", "size": "-"},
+    "o4-mini_Qwen2.5-72B-Instruct": {"name": "o4-mini", "affiliation": "OpenAI", "type": "Proprietary", "size": "-"},
+    "gemini-2.5-pro_Qwen2.5-72B-Instruct": {"name": "Gemini 2.5 Pro", "affiliation": "Google", "type": "Proprietary", "size": "-"},
+    "gemini-2.5-flash_Qwen2.5-72B-Instruct": {"name": "Gemini 2.5 Flash", "affiliation": "Google", "type": "Proprietary", "size": "-"},
+    "Claude-Sonnet-4.5_Qwen2.5-72B-Instruct": {"name": "Claude Sonnet 4.5", "affiliation": "Anthropic", "type": "Proprietary", "size": "-"},
+    "Mistral-Small-3.1-24B-Instruct-2503_Qwen2.5-72B-Instruct": {"name": "Mistral Small 3.1", "affiliation": "Mistral AI", "type": "Proprietary", "size": "24B"},
+    "Qwen3-VL-30B-A3B-Instruct_Qwen2.5-72B-Instruct": {"name": "Qwen3-VL", "affiliation": "Alibaba", "type": "Open-Source", "size": "30B-A3B"},
+    "Qwen3-VL-8B-Instruct_Qwen2.5-72B-Instruct": {"name": "Qwen3-VL", "affiliation": "Alibaba", "type": "Open-Source", "size": "8B"},
+    "Qwen3-VL-4B-Instruct_Qwen2.5-72B-Instruct": {"name": "Qwen3-VL", "affiliation": "Alibaba", "type": "Open-Source", "size": "4B"},
+    "Qwen2.5-VL-72B-Instruct_Qwen2.5-72B-Instruct": {"name": "Qwen2.5-VL", "affiliation": "Alibaba", "type": "Open-Source", "size": "72B"},
+    "Qwen2.5-VL-32B-Instruct_Qwen2.5-72B-Instruct": {"name": "Qwen2.5-VL", "affiliation": "Alibaba", "type": "Open-Source", "size": "32B"},
+    "Qwen2.5-VL-7B-Instruct_Qwen2.5-72B-Instruct": {"name": "Qwen2.5-VL", "affiliation": "Alibaba", "type": "Open-Source", "size": "7B"},
+    "GLM-4.1V-9B-Thinking_Qwen2.5-72B-Instruct": {"name": "GLM-4.1V", "affiliation": "Zhipu AI", "type": "Open-Source", "size": "9B"},
+    "InternVL3_5-38B_Qwen2.5-72B-Instruct": {"name": "InternVL3.5", "affiliation": "Shanghai AI Lab", "type": "Open-Source", "size": "38B"},
+    "InternVL3_5-30B-A3B_Qwen2.5-72B-Instruct": {"name": "InternVL3.5", "affiliation": "Shanghai AI Lab", "type": "Open-Source", "size": "30B-A3B"},
+    "InternVL3_5-8B_Qwen2.5-72B-Instruct": {"name": "InternVL3.5", "affiliation": "Shanghai AI Lab", "type": "Open-Source", "size": "8B"},
+    "InternVL3_5-1B_Qwen2.5-72B-Instruct": {"name": "InternVL3.5", "affiliation": "Shanghai AI Lab", "type": "Open-Source", "size": "1B"},
+    "InternVL3-78B_Qwen2.5-72B-Instruct": {"name": "InternVL3", "affiliation": "Shanghai AI Lab", "type": "Open-Source", "size": "78B"},
+    "InternVL3-14B_Qwen2.5-72B-Instruct": {"name": "InternVL3", "affiliation": "Shanghai AI Lab", "type": "Open-Source", "size": "14B"},
+    "InternVL3-8B_Qwen2.5-72B-Instruct": {"name": "InternVL3", "affiliation": "Shanghai AI Lab", "type": "Open-Source", "size": "8B"},
+    "nvidia_NVLM-D-72B_Qwen2.5-72B-Instruct": {"name": "NVLM-D", "affiliation": "NVIDIA", "type": "Open-Source", "size": "72B"},
+    "llava-onevision-qwen2-7b-ov-hf_Qwen2.5-72B-Instruct": {"name": "LLaVA-OneVision", "affiliation": "ByteDance", "type": "Open-Source", "size": "7B"},
+    "llava-1.5-7b-hf_Qwen2.5-72B-Instruct": {"name": "LLaVA-1.5", "affiliation": "UW-Madison", "type": "Open-Source", "size": "7B"}
 }
 
 def calculate_category_scores(domain, prompt, model_file):
@@ -53,6 +69,14 @@ def calculate_category_scores(domain, prompt, model_file):
 
     return results
 
+# Prompt display names
+prompt_display = {
+    "long": "Long",
+    "short": "Short",
+    "simple": "Simple",
+    "taxonomy_default": "Taxonomy Default"
+}
+
 # Category ordering for each domain
 category_order = {
     "natural": ["Action and Interaction", "Attribute", "Hallucination", "Object Existence", "Scene-Level Evaluation", "Spatial"],
@@ -76,7 +100,8 @@ for domain in domains:
                     "model": info["name"],
                     "affiliation": info["affiliation"],
                     "type": info["type"],
-                    "prompt": prompt.capitalize(),
+                    "size": info["size"],
+                    "prompt": prompt_display[prompt],
                     "scores": scores
                 }
                 domain_data[domain].append(row_data)
@@ -95,6 +120,7 @@ for domain in domains:
                       <td class="align-middle text-center">{rank}</td>
                       <td class="align-middle text-center">{row["model"]}<br><span class="affiliation">{row["affiliation"]}</span></td>
                       <td class="align-middle text-center"><span class="badge {badge_class}">{row["type"]}</span></td>
+                      <td class="align-middle text-center">{row["size"]}</td>
                       <td class="align-middle text-center">{row["prompt"]}</td>''', end='')
 
         # Add category scores in order
