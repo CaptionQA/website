@@ -7,7 +7,7 @@ qa_results_path = "/Users/yunongliu/Github/CaptionQA/qa_results"
 
 # Domains and prompts
 domains = ["natural", "document", "ecommerce", "embodiedai"]
-prompts = ["long", "short", "simple", "taxonomy_default"]
+prompts = ["simple"]  # Only use simple prompt
 
 # Model name mapping with affiliations and types
 model_info = {
@@ -110,7 +110,6 @@ for domain in domains:
                     "affiliation": info["affiliation"],
                     "type": info["type"],
                     "size": info["size"],
-                    "prompt": prompt_display[prompt],
                     "overall": overall_score,
                     "scores": scores
                 }
@@ -134,7 +133,6 @@ for domain in domains:
                       <td class="align-middle text-center">{row["model"]}<br><span class="affiliation">{row["affiliation"]}</span></td>
                       <td class="align-middle text-center"><span class="badge {badge_class}">{row["type"]}</span></td>
                       <td class="align-middle text-center">{row["size"]}</td>
-                      <td class="align-middle text-center">{row["prompt"]}</td>
                       <td class="align-middle text-center">{row["overall"]}</td>''', end='')
 
         # Add category scores in order

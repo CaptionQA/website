@@ -7,7 +7,7 @@ qa_results_path = "/Users/yunongliu/Github/CaptionQA/qa_results"
 
 # Domains and prompts
 domains = ["natural", "document", "ecommerce", "embodiedai"]
-prompts = ["long", "short", "simple", "taxonomy_default"]
+prompts = ["simple"]  # Only use simple prompt
 
 # Model name mapping with affiliations and types
 model_info = {
@@ -91,7 +91,6 @@ for prompt in prompts:
                 "affiliation": info["affiliation"],
                 "type": info["type"],
                 "size": info["size"],
-                "prompt": prompt_display[prompt],
                 "overall": overall_score,
                 "natural": domain_scores["natural"],
                 "document": domain_scores["document"],
@@ -116,7 +115,6 @@ for rank, row in enumerate(all_results, 1):
                       <td class="align-middle text-center">{row["model"]}<br><span class="affiliation">{row["affiliation"]}</span></td>
                       <td class="align-middle text-center"><span class="badge {badge_class}">{row["type"]}</span></td>
                       <td class="align-middle text-center">{row["size"]}</td>
-                      <td class="align-middle text-center">{row["prompt"]}</td>
                       <td class="align-middle text-center">{row["overall"]}</td>
                       <td class="align-middle text-center">{row["natural"]}</td>
                       <td class="align-middle text-center">{row["document"]}</td>
