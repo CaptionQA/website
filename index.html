@@ -129,13 +129,18 @@
 
         <!-- Right Column - Leaderboard -->
         <div class="col-lg-8">
-          <!-- Domain Selector -->
-          <div class="btn-group mb-3 w-100" style="display: flex; flex-wrap: wrap;">
-            <button id="overall-btn" class="btn btn-f" style="flex: 1;" onclick="showDomain('overall')">Overall</button>
-            <button id="natural-btn" class="btn btn-f" style="flex: 1;" onclick="showDomain('natural')">Natural</button>
-            <button id="document-btn" class="btn btn-f" style="flex: 1;" onclick="showDomain('document')">Document</button>
-            <button id="ecommerce-btn" class="btn btn-f" style="flex: 1;" onclick="showDomain('ecommerce')">E-commerce</button>
-            <button id="embodiedai-btn" class="btn btn-f" style="flex: 1;" onclick="showDomain('embodiedai')">Embodied AI</button>
+          <!-- Main Tab Selector -->
+          <div class="btn-group mb-3 w-100" style="display: flex;">
+            <button id="overall-tab-btn" class="btn btn-f" style="flex: 1;" onclick="showMainTab('overall')">Overall</button>
+            <button id="perdomain-tab-btn" class="btn btn-f" style="flex: 1;" onclick="showMainTab('perdomain')">Per Domain</button>
+          </div>
+
+          <!-- Domain Selector (for Per Domain tab) -->
+          <div id="domain-selector" class="btn-group mb-3 w-100" style="display: none; flex-wrap: wrap;">
+            <button id="natural-btn" class="btn btn-secondary" style="flex: 1;" onclick="showDomain('natural')">Natural</button>
+            <button id="document-btn" class="btn btn-secondary" style="flex: 1;" onclick="showDomain('document')">Document</button>
+            <button id="ecommerce-btn" class="btn btn-secondary" style="flex: 1;" onclick="showDomain('ecommerce')">E-commerce</button>
+            <button id="embodiedai-btn" class="btn btn-secondary" style="flex: 1;" onclick="showDomain('embodiedai')">Embodied AI</button>
           </div>
 
           <!-- Overall Leaderboard -->
@@ -321,20 +326,24 @@
             </div>
           </div>
 
-          <!-- Natural Domain -->
+          <!-- Natural Domain (Per Domain Tab) -->
           <div id="natural-board" class="domain-board" style="display: none;">
             <div class="card card-outline-secondary">
-              <div class="card-header">Natural Domain Leaderboard (%)</div>
-              <div class="table-wrapper">
+              <div class="card-header">Natural Domain - Category Scores (%)</div>
+              <div class="table-wrapper" style="overflow-x: auto;">
                 <table class="table table-sm" id="natural-table">
                   <thead class="thead-light">
                     <tr>
-                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 0)">Rank</th>
+                      <th class="align-middle text-center">Rank</th>
                       <th class="align-middle text-center">Model</th>
                       <th class="align-middle text-center">Type</th>
-                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 3)">Size</th>
                       <th class="align-middle text-center">Prompt</th>
-                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 5)">Score</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 4)">Action & Interaction</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 5)">Attribute</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 6)">Hallucination</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 7)">Object Existence</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 8)">Scene-Level</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('natural-table', 9)">Spatial</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -342,119 +351,36 @@
                       <td class="align-middle text-center">1</td>
                       <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
                       <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
                       <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">90.34</td>
+                      <td class="align-middle text-center">91.37</td>
+                      <td class="align-middle text-center">84.66</td>
+                      <td class="align-middle text-center">95.05</td>
+                      <td class="align-middle text-center">93.89</td>
+                      <td class="align-middle text-center">94.94</td>
+                      <td class="align-middle text-center">78.27</td>
                     </tr>
                     <tr>
                       <td class="align-middle text-center">2</td>
                       <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
                       <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
                       <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">89.44</td>
+                      <td class="align-middle text-center">88.71</td>
+                      <td class="align-middle text-center">84.52</td>
+                      <td class="align-middle text-center">93.92</td>
+                      <td class="align-middle text-center">93.71</td>
+                      <td class="align-middle text-center">92.56</td>
+                      <td class="align-middle text-center">75.48</td>
                     </tr>
                     <tr>
                       <td class="align-middle text-center">3</td>
-                      <td class="align-middle text-center">Gemini 2.5 Flash<br><span class="affiliation">Google</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">88.95</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">4</td>
-                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">88.78</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">5</td>
-                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Taxonomy</td>
-                      <td class="align-middle text-center">87.47</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">6</td>
-                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Taxonomy</td>
-                      <td class="align-middle text-center">86.87</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">7</td>
                       <td class="align-middle text-center">Qwen3-VL<br><span class="affiliation">Alibaba</span></td>
                       <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">30B-A3B</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">86.14</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">8</td>
-                      <td class="align-middle text-center">Qwen3-VL<br><span class="affiliation">Alibaba</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">30B-A3B</td>
                       <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">85.62</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Category Breakdown for Natural Domain -->
-            <div class="card card-outline-secondary mt-3">
-              <div class="card-header">Category-Level Scores (Long Prompt) (%)</div>
-              <div class="table-wrapper">
-                <table class="table table-sm">
-                  <thead class="thead-light">
-                    <tr>
-                      <th class="align-middle text-center">Category</th>
-                      <th class="align-middle text-center">GPT-5</th>
-                      <th class="align-middle text-center">Gemini 2.5 Pro</th>
-                      <th class="align-middle text-center">Qwen3-VL</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="align-middle">Action and Interaction</td>
-                      <td class="align-middle text-center">91.37</td>
-                      <td class="align-middle text-center">88.71</td>
                       <td class="align-middle text-center">82.87</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Attribute</td>
-                      <td class="align-middle text-center">84.66</td>
-                      <td class="align-middle text-center">84.52</td>
                       <td class="align-middle text-center">78.71</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Hallucination</td>
-                      <td class="align-middle text-center">95.05</td>
-                      <td class="align-middle text-center">93.92</td>
                       <td class="align-middle text-center">92.04</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Object Existence</td>
-                      <td class="align-middle text-center">93.89</td>
-                      <td class="align-middle text-center">93.71</td>
                       <td class="align-middle text-center">89.49</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Scene-Level Evaluation</td>
-                      <td class="align-middle text-center">94.94</td>
-                      <td class="align-middle text-center">92.56</td>
                       <td class="align-middle text-center">91.14</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Spatial</td>
-                      <td class="align-middle text-center">78.27</td>
-                      <td class="align-middle text-center">75.48</td>
                       <td class="align-middle text-center">68.57</td>
                     </tr>
                   </tbody>
@@ -463,20 +389,24 @@
             </div>
           </div>
 
-          <!-- Document Domain -->
+          <!-- Document Domain (Per Domain Tab) -->
           <div id="document-board" class="domain-board" style="display: none;">
             <div class="card card-outline-secondary">
-              <div class="card-header">Document Domain Leaderboard (%)</div>
-              <div class="table-wrapper">
+              <div class="card-header">Document Domain - Category Scores (%)</div>
+              <div class="table-wrapper" style="overflow-x: auto;">
                 <table class="table table-sm" id="document-table">
                   <thead class="thead-light">
                     <tr>
-                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 0)">Rank</th>
+                      <th class="align-middle text-center">Rank</th>
                       <th class="align-middle text-center">Model</th>
                       <th class="align-middle text-center">Type</th>
-                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 3)">Size</th>
                       <th class="align-middle text-center">Prompt</th>
-                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 5)">Score</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 4)">Chart-Specific</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 5)">Content-Level</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 6)">Diagram-Specific</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 7)">Domain-Specific</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 8)">Structural</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('document-table', 9)">Table-Specific</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -484,103 +414,36 @@
                       <td class="align-middle text-center">1</td>
                       <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
                       <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">90.81</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">87.73</td>
+                      <td class="align-middle text-center">92.06</td>
+                      <td class="align-middle text-center">91.78</td>
+                      <td class="align-middle text-center">94.75</td>
+                      <td class="align-middle text-center">82.76</td>
+                      <td class="align-middle text-center">87.91</td>
                     </tr>
                     <tr>
                       <td class="align-middle text-center">2</td>
-                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
+                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
                       <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
                       <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">90.01</td>
+                      <td class="align-middle text-center">88.41</td>
+                      <td class="align-middle text-center">92.54</td>
+                      <td class="align-middle text-center">92.74</td>
+                      <td class="align-middle text-center">95.29</td>
+                      <td class="align-middle text-center">74.92</td>
+                      <td class="align-middle text-center">86.02</td>
                     </tr>
                     <tr>
                       <td class="align-middle text-center">3</td>
-                      <td class="align-middle text-center">Gemini 2.5 Flash<br><span class="affiliation">Google</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">88.97</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">4</td>
-                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">88.67</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">5</td>
-                      <td class="align-middle text-center">GLM-4.1V<br><span class="affiliation">Zhipu AI</span></td>
+                      <td class="align-middle text-center">Qwen3-VL<br><span class="affiliation">Alibaba</span></td>
                       <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">9B</td>
                       <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">88.34</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">6</td>
-                      <td class="align-middle text-center">GLM-4.1V<br><span class="affiliation">Zhipu AI</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">9B</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">87.86</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Category Breakdown for Document Domain -->
-            <div class="card card-outline-secondary mt-3">
-              <div class="card-header">Category-Level Scores (Long Prompt) (%)</div>
-              <div class="table-wrapper">
-                <table class="table table-sm">
-                  <thead class="thead-light">
-                    <tr>
-                      <th class="align-middle text-center">Category</th>
-                      <th class="align-middle text-center">GPT-5</th>
-                      <th class="align-middle text-center">Gemini 2.5 Pro</th>
-                      <th class="align-middle text-center">Qwen3-VL</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="align-middle">Chart-Specific Elements</td>
-                      <td class="align-middle text-center">87.73</td>
-                      <td class="align-middle text-center">88.41</td>
                       <td class="align-middle text-center">84.35</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Content-Level Evaluation</td>
-                      <td class="align-middle text-center">92.06</td>
-                      <td class="align-middle text-center">92.54</td>
                       <td class="align-middle text-center">89.61</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Diagram-Specific Elements</td>
-                      <td class="align-middle text-center">91.78</td>
-                      <td class="align-middle text-center">92.74</td>
                       <td class="align-middle text-center">86.89</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Domain-Specific Evaluation</td>
-                      <td class="align-middle text-center">94.75</td>
-                      <td class="align-middle text-center">95.29</td>
                       <td class="align-middle text-center">91.12</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Structural Elements</td>
-                      <td class="align-middle text-center">82.76</td>
-                      <td class="align-middle text-center">74.92</td>
                       <td class="align-middle text-center">74.13</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Table-Specific Elements</td>
-                      <td class="align-middle text-center">87.91</td>
-                      <td class="align-middle text-center">86.02</td>
                       <td class="align-middle text-center">83.29</td>
                     </tr>
                   </tbody>
@@ -589,20 +452,25 @@
             </div>
           </div>
 
-          <!-- E-commerce Domain -->
+          <!-- E-commerce Domain (Per Domain Tab) -->
           <div id="ecommerce-board" class="domain-board" style="display: none;">
             <div class="card card-outline-secondary">
-              <div class="card-header">E-commerce Domain Leaderboard (%)</div>
-              <div class="table-wrapper">
+              <div class="card-header">E-commerce Domain - Category Scores (%)</div>
+              <div class="table-wrapper" style="overflow-x: auto;">
                 <table class="table table-sm" id="ecommerce-table">
                   <thead class="thead-light">
                     <tr>
-                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 0)">Rank</th>
+                      <th class="align-middle text-center">Rank</th>
                       <th class="align-middle text-center">Model</th>
                       <th class="align-middle text-center">Type</th>
-                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 3)">Size</th>
                       <th class="align-middle text-center">Prompt</th>
-                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 5)">Score</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 4)">Brand & Marketing</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 5)">Contextual & Scene</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 6)">Functional</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 7)">Packaging</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 8)">Product-Level</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 9)">Textual Elements</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('ecommerce-table', 10)">Visual Appearance</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -610,109 +478,39 @@
                       <td class="align-middle text-center">1</td>
                       <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
                       <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
                       <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">96.11</td>
+                      <td class="align-middle text-center">96.26</td>
+                      <td class="align-middle text-center">97.37</td>
+                      <td class="align-middle text-center">98.26</td>
+                      <td class="align-middle text-center">94.85</td>
+                      <td class="align-middle text-center">98.24</td>
+                      <td class="align-middle text-center">97.63</td>
+                      <td class="align-middle text-center">86.64</td>
                     </tr>
                     <tr>
                       <td class="align-middle text-center">2</td>
-                      <td class="align-middle text-center">Gemini 2.5 Flash<br><span class="affiliation">Google</span></td>
+                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
                       <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">95.73</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">97.65</td>
+                      <td class="align-middle text-center">96.69</td>
+                      <td class="align-middle text-center">97.63</td>
+                      <td class="align-middle text-center">92.65</td>
+                      <td class="align-middle text-center">97.75</td>
+                      <td class="align-middle text-center">98.92</td>
+                      <td class="align-middle text-center">82.33</td>
                     </tr>
                     <tr>
                       <td class="align-middle text-center">3</td>
-                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">95.60</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">4</td>
-                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">94.73</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">5</td>
                       <td class="align-middle text-center">Qwen3-VL<br><span class="affiliation">Alibaba</span></td>
                       <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">30B-A3B</td>
                       <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">94.27</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">6</td>
-                      <td class="align-middle text-center">Qwen3-VL<br><span class="affiliation">Alibaba</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
-                      <td class="align-middle text-center">30B-A3B</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">93.90</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Category Breakdown for E-commerce Domain -->
-            <div class="card card-outline-secondary mt-3">
-              <div class="card-header">Category-Level Scores (Long Prompt) (%)</div>
-              <div class="table-wrapper">
-                <table class="table table-sm">
-                  <thead class="thead-light">
-                    <tr>
-                      <th class="align-middle text-center">Category</th>
-                      <th class="align-middle text-center">GPT-5</th>
-                      <th class="align-middle text-center">Gemini 2.5 Pro</th>
-                      <th class="align-middle text-center">Qwen3-VL</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="align-middle">Brand and Marketing Information</td>
-                      <td class="align-middle text-center">96.26</td>
-                      <td class="align-middle text-center">97.65</td>
                       <td class="align-middle text-center">94.76</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Contextual and Scene Information</td>
-                      <td class="align-middle text-center">97.37</td>
-                      <td class="align-middle text-center">96.69</td>
                       <td class="align-middle text-center">95.72</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Functional Information</td>
-                      <td class="align-middle text-center">98.26</td>
-                      <td class="align-middle text-center">97.63</td>
                       <td class="align-middle text-center">96.37</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Packaging and Accessories</td>
-                      <td class="align-middle text-center">94.85</td>
                       <td class="align-middle text-center">92.65</td>
-                      <td class="align-middle text-center">92.65</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Product-Level Information</td>
-                      <td class="align-middle text-center">98.24</td>
-                      <td class="align-middle text-center">97.75</td>
                       <td class="align-middle text-center">95.51</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Textual Elements in Image</td>
-                      <td class="align-middle text-center">97.63</td>
-                      <td class="align-middle text-center">98.92</td>
                       <td class="align-middle text-center">97.95</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Visual Appearance and Presentation</td>
-                      <td class="align-middle text-center">86.64</td>
-                      <td class="align-middle text-center">82.33</td>
                       <td class="align-middle text-center">80.50</td>
                     </tr>
                   </tbody>
@@ -721,20 +519,24 @@
             </div>
           </div>
 
-          <!-- Embodied AI Domain -->
+          <!-- Embodied AI Domain (Per Domain Tab) -->
           <div id="embodiedai-board" class="domain-board" style="display: none;">
             <div class="card card-outline-secondary">
-              <div class="card-header">Embodied AI Domain Leaderboard (%)</div>
-              <div class="table-wrapper">
+              <div class="card-header">Embodied AI Domain - Category Scores (%)</div>
+              <div class="table-wrapper" style="overflow-x: auto;">
                 <table class="table table-sm" id="embodiedai-table">
                   <thead class="thead-light">
                     <tr>
-                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 0)">Rank</th>
+                      <th class="align-middle text-center">Rank</th>
                       <th class="align-middle text-center">Model</th>
                       <th class="align-middle text-center">Type</th>
-                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 3)">Size</th>
                       <th class="align-middle text-center">Prompt</th>
-                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 5)">Score</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 4)">Activity & Task</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 5)">Functional & Semantic</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 6)">Perception</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 7)">Scene Dynamics</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 8)">Sensor & Embodiment</th>
+                      <th class="align-middle text-center sortable" onclick="sortTable('embodiedai-table', 9)">Spatial & Environment</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -742,103 +544,36 @@
                       <td class="align-middle text-center">1</td>
                       <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
                       <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">86.82</td>
+                      <td class="align-middle text-center">Long</td>
+                      <td class="align-middle text-center">92.75</td>
+                      <td class="align-middle text-center">81.25</td>
+                      <td class="align-middle text-center">77.80</td>
+                      <td class="align-middle text-center">86.11</td>
+                      <td class="align-middle text-center">78.10</td>
+                      <td class="align-middle text-center">81.66</td>
                     </tr>
                     <tr>
                       <td class="align-middle text-center">2</td>
                       <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
                       <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
                       <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">86.78</td>
+                      <td class="align-middle text-center">93.30</td>
+                      <td class="align-middle text-center">89.73</td>
+                      <td class="align-middle text-center">80.79</td>
+                      <td class="align-middle text-center">82.55</td>
+                      <td class="align-middle text-center">87.07</td>
+                      <td class="align-middle text-center">83.19</td>
                     </tr>
                     <tr>
                       <td class="align-middle text-center">3</td>
-                      <td class="align-middle text-center">Gemini 2.5 Pro<br><span class="affiliation">Google</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Taxonomy</td>
-                      <td class="align-middle text-center">85.35</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">4</td>
-                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Taxonomy</td>
-                      <td class="align-middle text-center">85.10</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">5</td>
-                      <td class="align-middle text-center">Gemini 2.5 Flash<br><span class="affiliation">Google</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
-                      <td class="align-middle text-center">Simple</td>
-                      <td class="align-middle text-center">84.89</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle text-center">6</td>
-                      <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
-                      <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
-                      <td class="align-middle text-center">-</td>
+                      <td class="align-middle text-center">Qwen3-VL<br><span class="affiliation">Alibaba</span></td>
+                      <td class="align-middle text-center"><span class="badge badge-success">Open-Source</span></td>
                       <td class="align-middle text-center">Long</td>
-                      <td class="align-middle text-center">82.83</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Category Breakdown for Embodied AI Domain -->
-            <div class="card card-outline-secondary mt-3">
-              <div class="card-header">Category-Level Scores (Long Prompt) (%)</div>
-              <div class="table-wrapper">
-                <table class="table table-sm">
-                  <thead class="thead-light">
-                    <tr>
-                      <th class="align-middle text-center">Category</th>
-                      <th class="align-middle text-center">GPT-5</th>
-                      <th class="align-middle text-center">Gemini 2.5 Pro</th>
-                      <th class="align-middle text-center">Qwen3-VL</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="align-middle">Activity and Task Context</td>
-                      <td class="align-middle text-center">92.75</td>
-                      <td class="align-middle text-center">93.30</td>
                       <td class="align-middle text-center">93.19</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Functional and Semantic Understanding</td>
-                      <td class="align-middle text-center">81.25</td>
-                      <td class="align-middle text-center">89.73</td>
                       <td class="align-middle text-center">84.80</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Perception</td>
-                      <td class="align-middle text-center">77.80</td>
-                      <td class="align-middle text-center">80.79</td>
                       <td class="align-middle text-center">73.80</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Scene Dynamics</td>
-                      <td class="align-middle text-center">86.11</td>
-                      <td class="align-middle text-center">82.55</td>
                       <td class="align-middle text-center">75.47</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Sensor and Embodiment Information</td>
-                      <td class="align-middle text-center">78.10</td>
-                      <td class="align-middle text-center">87.07</td>
                       <td class="align-middle text-center">83.66</td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">Spatial and Environment Context</td>
-                      <td class="align-middle text-center">81.66</td>
-                      <td class="align-middle text-center">83.19</td>
                       <td class="align-middle text-center">78.31</td>
                     </tr>
                   </tbody>
@@ -869,20 +604,51 @@
     <script src="./script/clean-blog.min.js"></script>
 
     <script>
-      // Domain switching
-      function showDomain(domain) {
-        document.querySelectorAll('.domain-board').forEach(el => {
-          el.style.display = 'none';
-        });
+      // Main tab switching (Overall vs Per Domain)
+      function showMainTab(tab) {
+        // Update main tab buttons
         document.querySelectorAll('.btn-f').forEach(btn => {
           btn.classList.remove('active');
         });
+        document.getElementById(tab + '-tab-btn').classList.add('active');
+
+        if (tab === 'overall') {
+          // Show overall board, hide domain selector and per-domain boards
+          document.getElementById('overall-board').style.display = 'block';
+          document.getElementById('domain-selector').style.display = 'none';
+          document.getElementById('natural-board').style.display = 'none';
+          document.getElementById('document-board').style.display = 'none';
+          document.getElementById('ecommerce-board').style.display = 'none';
+          document.getElementById('embodiedai-board').style.display = 'none';
+        } else if (tab === 'perdomain') {
+          // Hide overall board, show domain selector
+          document.getElementById('overall-board').style.display = 'none';
+          document.getElementById('domain-selector').style.display = 'flex';
+          // Show first domain by default
+          showDomain('natural');
+        }
+      }
+
+      // Domain switching (within Per Domain tab)
+      function showDomain(domain) {
+        // Hide all domain boards
+        document.getElementById('natural-board').style.display = 'none';
+        document.getElementById('document-board').style.display = 'none';
+        document.getElementById('ecommerce-board').style.display = 'none';
+        document.getElementById('embodiedai-board').style.display = 'none';
+
+        // Update domain buttons
+        document.querySelectorAll('.btn-secondary').forEach(btn => {
+          btn.classList.remove('active');
+        });
+
+        // Show selected domain
         document.getElementById(domain + '-board').style.display = 'block';
         document.getElementById(domain + '-btn').classList.add('active');
       }
 
       document.addEventListener('DOMContentLoaded', function() {
-        showDomain('overall');
+        showMainTab('overall');
       });
 
       // Table sorting
