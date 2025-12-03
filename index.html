@@ -146,10 +146,10 @@
               <p><b>3.</b> (Optional) Evaluate on validation set</p>
               <p><b>4.</b> Email captions to <a href="mailto:captionqa.team@gmail.com">captionqa.team@gmail.com</a></p>
               <p><b>5.</b> We evaluate and email you the results</p>
-              <p><b>6.</b> Reply to confirm if you want to be on the leaderboard</p>
+              <p><b>6.</b> PR a table row to <a href="https://github.com/CaptionQA/website" target="_blank">leaderboard repo</a></p>
               <p style="margin-top: 10px; font-size: 0.9em; color: #6c757d;">
                 <b>Privacy First:</b> Email us only your captions (simple image_id: caption JSON), no personal info needed.<br>
-                <b>You Decide:</b> We only add results to the leaderboard if you explicitly confirm. Don't reply = stays private.<br>
+                <b>Easy PR:</b> Copy our HTML template, fill in your scores, and add one table row to index.html.<br>
                 See the <a href="https://github.com/bronyayang/CaptionQA#-submitting-to-the-leaderboard" target="_blank" style="color: #007bff;">detailed submission guide</a> for the complete process.
               </p>
             </div>
@@ -206,6 +206,40 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <!--
+                      ============================================
+                      TO ADD YOUR MODEL TO THE LEADERBOARD:
+                      ============================================
+                      1. Copy the template row below
+                      2. Fill in your model information:
+                         - Rank: Use "-" (table auto-sorts by Overall score)
+                         - Date: YYYY-MMM-DD format (e.g., 2025-Dec-02)
+                         - Model name: Your model's name
+                         - Affiliation: Your organization (OPTIONAL - use "-" if not provided)
+                         - Type: badge-primary (Proprietary) or badge-success (Open-Source) (OPTIONAL)
+                         - Size: e.g., "7B", "72B", or "-" (OPTIONAL)
+                         - Scores: Overall, Natural, Document, E-comm, Embodied (in this order)
+                      3. Add your row anywhere in this <tbody> section
+                      4. Submit a Pull Request
+
+                      NOTE: Category-level scores are optional but recommended. They will be
+                      visible in the "Per Domain" tabs. Existing entries keep their numeric
+                      ranks (1, 2, 3...), new submissions use "-" for auto-sorting.
+
+                      TEMPLATE:
+                      <tr>
+                        <td class="align-middle text-center">-<br><span class="eval-date">2025-Dec-02</span></td>
+                        <td class="align-middle text-center">Your Model<br><span class="affiliation">Your Org</span></td>
+                        <td class="align-middle text-center"><span class="badge badge-primary">Proprietary</span></td>
+                        <td class="align-middle text-center">7B</td>
+                        <td class="align-middle text-center">85.50</td>
+                        <td class="align-middle text-center">84.20</td>
+                        <td class="align-middle text-center">86.10</td>
+                        <td class="align-middle text-center">88.30</td>
+                        <td class="align-middle text-center">83.40</td>
+                      </tr>
+                      ============================================
+                    -->
                     <tr>
                       <td class="align-middle text-center">1<br><span class="eval-date">2025-Nov-19</span></td>
                       <td class="align-middle text-center">GPT-5<br><span class="affiliation">OpenAI</span></td>
